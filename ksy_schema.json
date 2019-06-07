@@ -3,7 +3,7 @@
   "title": "ksy schema",
   "description": "the schema for ksy files",
   "type": "object",
-  "additionalProperties": "false",
+  "additionalProperties": false,
   "properties": {
     "meta": {
       "$ref": "#/definitions/MetaSpec",
@@ -115,7 +115,7 @@
       }
     },
     "Attribute": {
-      "additionalProperties": "false",
+      "additionalProperties": false,
       "type": "object",
       "properties": {
         "id": {
@@ -292,7 +292,7 @@
       "properties": {
         "meta": { "$ref": "#/definitions/MetaSpec" },
         "params": { "$ref": "#/definitions/ParamsSpec" },
-        "seq": { "$ref": "#/definitions/AttrsSpec" },
+        "seq": { "$ref": "#/definitions/Attributes" },
         "types": { "$ref": "#/definitions/TypesSpec" },
         "enums": { "$ref": "#/definitions/EnumsSpec" },
         "instances": { "$ref": "#/definitions/InstancesSpec" },
