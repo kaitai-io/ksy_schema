@@ -241,6 +241,10 @@
         "encoding": {
           "type": "string"
         },
+        "pad-right": {
+          "type": "integer",
+          "description": "specify a byte which is the string or byte array padded with up to the total size"
+        },
         "terminator": {
           "type": "integer",
           "description": "string reading will stop when it encounters this value default is 0"
