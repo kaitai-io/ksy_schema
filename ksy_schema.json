@@ -85,6 +85,14 @@
             { "type": "number" }
           ]
         },
+        "ks-debug": {
+          "type": "boolean",
+          "description": "advise the Kaitai Struct Compiler (KSC) to use debug mode"
+        },
+        "ks-opaque-types": {
+          "type": "boolean",
+          "description": "advise the Kaitai Struct Compiler (KSC) to ignore missing types in the .ksy file, and assume that these types are already provided externally by the environment the classes are generated for"
+        },
         "imports": {
           "type": "array",
           "items": {
