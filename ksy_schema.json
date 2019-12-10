@@ -36,7 +36,7 @@
     }
   },
   "patternProperties": {
-    "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
+    "^-.*$": true
   },
   "definitions": {
     "MetaSpec": {
@@ -280,7 +280,7 @@
         }
       },
       "patternProperties": {
-        "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
+        "^-.*$": true
       }
     },
     "Attributes": {
@@ -313,7 +313,7 @@
         "doc-ref": { "type": "string" }
       },
       "patternProperties": {
-        "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
+        "^-.*$": true
       }
     },
     "TypesSpec": {
@@ -362,7 +362,7 @@
             "-orig-id": { "type": "string" }
           },
           "patternProperties": {
-            "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
+            "^-.*$": true
           }
         }
       ]
