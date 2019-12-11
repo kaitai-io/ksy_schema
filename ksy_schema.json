@@ -337,9 +337,8 @@
       }
     },
     "EnumValueSpec": {
-      "$ref": "#/definitions/Identifier",
       "anyOf": [
-        { "type": "string" },
+        { "$ref": "#/definitions/Identifier" },
         {
           "type": "object",
           "additionalProperties": false,
