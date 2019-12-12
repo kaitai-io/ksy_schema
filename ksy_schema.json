@@ -122,6 +122,9 @@
             }
           ]
         }
+      },
+      "patternProperties": {
+        "^-.*$": true
       }
     },
     "Attribute": {
@@ -333,6 +336,9 @@
         "type": { "type": "string" },
         "doc": { "type": "string" },
         "doc-ref": { "type": "string" }
+      },
+      "patternProperties": {
+        "^-.*$": true
       },
       "required": ["id"]
     },
