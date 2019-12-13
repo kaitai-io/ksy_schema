@@ -275,7 +275,8 @@
       "if": {
         "properties": {
           "type": { "const": "strz" }
-        }
+        },
+        "required": ["type"]
       },
       "then": {
         "not": { "required": [ "terminator" ] }
