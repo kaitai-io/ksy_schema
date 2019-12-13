@@ -243,8 +243,7 @@
         },
         "terminator": {
           "type": "integer",
-          "description": "string reading will stop when it encounters this value\n\ndefault is 0",
-          "default": 0
+          "description": "string or byte array reading will stop when it encounters this byte\n\ncannot be used with \"type: strz\" (which already implies \"terminator: 0\" - null-terminated string)"
         },
         "consume": {
           "type": "boolean",
@@ -272,6 +271,14 @@
         "value": {
           "description": "overrides any reading & parsing. Instead, just calculates function specified in value and returns the result as this instance. Has many purposes"
         }
+      },
+      "if": {
+        "properties": {
+          "type": { "const": "strz" }
+        }
+      },
+      "then": {
+        "not": { "required": [ "terminator" ] }
       }
     },
     "Attributes": {
