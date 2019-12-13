@@ -347,8 +347,8 @@
       }
     },
     "EnumValueSpec": {
-      "$ref": "#/definitions/Identifier",
       "anyOf": [
+        { "$ref": "#/definitions/Identifier" },
         {
           "type": "object",
           "additionalProperties": false,
@@ -358,6 +358,9 @@
             "doc-ref": { "type": "string" },
             "-orig-id": { "type": "string" }
           },
+          "required": [
+            "id"
+          ],
           "patternProperties": {
             "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
           }
