@@ -12,10 +12,10 @@
       ]
     },
     "doc": {
-      "$ref": "#/definitions/Attribute/properties/doc"
+      "$ref": "#/definitions/Doc"
     },
     "doc-ref": {
-      "$ref": "#/definitions/Attribute/properties/doc-ref"
+      "$ref": "#/definitions/DocRef"
     },
     "params": { "$ref": "#/definitions/ParamsSpec" },
     "seq": {
@@ -39,6 +39,22 @@
     "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
   },
   "definitions": {
+    "Doc": {
+      "type": "string",
+      "description": "used to give a more detailed description of a user-defined type. In most languages, it will be used as a docstring compatible with tools like Javadoc, Doxygen, JSDoc, etc."
+    },
+    "DocRef": {
+      "description": "used to provide reference to original documentation (if the ksy file is actually an implementation of some documented format).\n\nContains: (1) URL as text, (2) arbitrary string, or (3) URL as text + space + arbitrary string",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      ]
+    },
     "MetaSpec": {
       "type": "object",
       "additionalProperties": false,
@@ -133,12 +149,10 @@
           "description": "contains a string that matches /^[a-z][a-z0-9_]*$/ used to identify one attribute among others"
         },
         "doc": {
-          "type": "string",
-          "description": "used to give a more detailed description of a user-defined type. In most languages, it will be used as a docstring compatible with tools like Javadoc, Doxygen, JSDoc, etc."
+          "$ref": "#/definitions/Doc"
         },
         "doc-ref": {
-          "type": "string",
-          "description": "used to provide reference to original documentation (if the ksy file is actually an implementation of some documented format).\n\nContains: (1) URL as text, (2) arbitrary string, or (3) URL as text + space + arbitrary string"
+          "$ref": "#/definitions/DocRef"
         },
         "contents": {
           "description": "specify fixed contents that the parser should encounter at this point. If the content of the stream doesn't match the given bytes, an error is thrown and it's meaningless to continue parsing",
@@ -306,8 +320,8 @@
         "types": { "$ref": "#/definitions/TypesSpec" },
         "enums": { "$ref": "#/definitions/EnumsSpec" },
         "instances": { "$ref": "#/definitions/InstancesSpec" },
-        "doc": { "type": "string" },
-        "doc-ref": { "type": "string" }
+        "doc": { "$ref": "#/definitions/Doc" },
+        "doc-ref": { "$ref": "#/definitions/DocRef" }
       },
       "patternProperties": {
         "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
@@ -328,8 +342,8 @@
       "properties": {
         "id": { "$ref": "#/definitions/Identifier" },
         "type": { "type": "string" },
-        "doc": { "type": "string" },
-        "doc-ref": { "type": "string" }
+        "doc": { "$ref": "#/definitions/Doc" },
+        "doc-ref": { "$ref": "#/definitions/DocRef" }
       },
       "required": ["id"]
     },
@@ -354,8 +368,8 @@
           "additionalProperties": false,
           "properties": {
             "id": { "$ref": "#/definitions/Identifier" },
-            "doc": { "type": "string" },
-            "doc-ref": { "type": "string" },
+            "doc": { "$ref": "#/definitions/Doc" },
+            "doc-ref": { "$ref": "#/definitions/DocRef" },
             "-orig-id": { "type": "string" }
           },
           "required": [
