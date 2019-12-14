@@ -36,7 +36,7 @@
     }
   },
   "patternProperties": {
-    "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
+    "^-.*$": true
   },
   "definitions": {
     "Doc": {
@@ -138,6 +138,9 @@
             }
           ]
         }
+      },
+      "patternProperties": {
+        "^-.*$": true
       }
     },
     "Attribute": {
@@ -297,6 +300,9 @@
           "description": "overrides any reading & parsing. Instead, just calculates function specified in value and returns the result as this instance. Has many purposes"
         }
       },
+      "patternProperties": {
+        "^-.*$": true
+      },
       "if": { "required": ["pad-right"] },
       "then": {
         "anyOf": [
@@ -340,7 +346,7 @@
         "doc-ref": { "$ref": "#/definitions/DocRef" }
       },
       "patternProperties": {
-        "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
+        "^-.*$": true
       }
     },
     "TypesSpec": {
@@ -360,6 +366,9 @@
         "type": { "type": "string" },
         "doc": { "$ref": "#/definitions/Doc" },
         "doc-ref": { "$ref": "#/definitions/DocRef" }
+      },
+      "patternProperties": {
+        "^-.*$": true
       },
       "required": ["id"]
     },
@@ -392,7 +401,7 @@
             "id"
           ],
           "patternProperties": {
-            "^-.*$": { "$ref": "#/definitions/StringOrInteger" }
+            "^-.*$": true
           }
         }
       ]
