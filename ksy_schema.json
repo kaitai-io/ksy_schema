@@ -265,6 +265,10 @@
         "encoding": {
           "type": "string"
         },
+        "pad-right": {
+          "type": "integer",
+          "description": "specify a byte which is the string or byte array padded with after the end up to the total size\n\ncan be used only with \"size\" or \"size-eos: true\" (when the size is fixed)\n\nwhen \"terminator\":\n - isn't specified, then the \"pad-right\" controls where the string ends (basically acts like a terminator)\n - is specified, padding comes after the terminator, not before. The value is terminated immediately after the terminator occurs, so the \"pad-right\" has no effect on parsing and is only relevant for serialization"
+        },
         "terminator": {
           "type": "integer",
           "description": "string reading will stop when it encounters this value default is 0"
@@ -292,6 +296,18 @@
         "value": {
           "description": "overrides any reading & parsing. Instead, just calculates function specified in value and returns the result as this instance. Has many purposes"
         }
+      },
+      "if": { "required": ["pad-right"] },
+      "then": {
+        "anyOf": [
+          { "required": ["size"] },
+          {
+            "properties": {
+              "size-eos": { "const": true }
+            },
+            "required": ["size-eos"]
+          }
+        ]
       }
     },
     "Attributes": {
