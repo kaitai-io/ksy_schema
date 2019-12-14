@@ -274,19 +274,22 @@
         },
         "terminator": {
           "type": "integer",
-          "description": "string reading will stop when it encounters this value default is 0"
+          "description": "string or byte array reading will stop when it encounters this byte\n\ncannot be used with \"type: strz\" (which already implies \"terminator: 0\" - null-terminated string)"
         },
         "consume": {
           "type": "boolean",
-          "description": "specify if terminator byte should be \"consumed\" when reading\n\nif true: the stream pointer will point to the byte after the terminator byte\n\nif false: the stream pointer will point to the terminator byte itself\n\ndefault is true"
+          "description": "specify if terminator byte should be \"consumed\" when reading\n\nif true: the stream pointer will point to the byte after the terminator byte\n\nif false: the stream pointer will point to the terminator byte itself\n\ndefault is true",
+          "default": true
         },
         "include": {
           "type": "boolean",
-          "description": "specifies if terminator byte should be considered part of the string read and thus be appended to it\n\ndefault is false"
+          "description": "specifies if terminator byte should be considered part of the string read and thus be appended to it\n\ndefault is false",
+          "default": false
         },
         "eos-error": {
           "type": "boolean",
-          "description": "allows the compiler to ignore the lack of a terminator if eos-error is disabled, string reading will stop at either:\n\n(1.) terminator being encountered\n\n(2.) end of stream is reached\n\ndefault is TRUE"
+          "description": "allows the compiler to ignore the lack of a terminator if eos-error is disabled, string reading will stop at either:\n\n(1.) terminator being encountered\n\n(2.) end of stream is reached\n\ndefault is TRUE",
+          "default": true
         },
         "pos": {
           "description": "specifies position at which the value should be parsed",
@@ -303,18 +306,33 @@
       "patternProperties": {
         "^-.*$": true
       },
-      "if": { "required": ["pad-right"] },
-      "then": {
-        "anyOf": [
-          { "required": ["size"] },
-          {
+      "allOf": [
+        {
+          "if": {
             "properties": {
-              "size-eos": { "const": true }
+              "type": { "const": "strz" }
             },
-            "required": ["size-eos"]
+            "required": ["type"]
+          },
+          "then": {
+            "not": { "required": [ "terminator" ] }
           }
-        ]
-      }
+        },
+        {
+          "if": { "required": ["pad-right"] },
+          "then": {
+            "anyOf": [
+              { "required": ["size"] },
+              {
+                "properties": {
+                  "size-eos": { "const": true }
+                },
+                "required": ["size-eos"]
+              }
+            ]
+          }
+        }
+      ]
     },
     "Attributes": {
       "type": "array",
