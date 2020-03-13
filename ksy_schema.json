@@ -126,7 +126,7 @@
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "switch-on": { "type": "string" },
+                "switch-on": { "$ref": "#/definitions/AnyScalar" },
                 "cases": {
                   "type": "object",
                   "additionalProperties": false,
@@ -181,18 +181,12 @@
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "switch-on": {
-                  "type": "string",
-                  "pattern": "^[a-z_][a-z0-9_.]*$"
-                },
+                "switch-on": { "$ref": "#/definitions/AnyScalar" },
                 "cases": {
                   "type": "object",
                   "additionalProperties": false,
                   "patternProperties": {
-                    "^.*$": {
-                      "type": "string",
-                      "pattern": "^[a-z_][a-z0-9_.]*$"
-                    }
+                    "^.*$": { "$ref": "#/definitions/AnyScalar" }
                   }
                 }
               }
