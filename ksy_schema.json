@@ -44,7 +44,7 @@
       "description": "used to give a more detailed description of a user-defined type. In most languages, it will be used as a docstring compatible with tools like Javadoc, Doxygen, JSDoc, etc."
     },
     "DocRef": {
-      "description": "used to provide reference to original documentation (if the ksy file is actually an implementation of some documented format).\n\nContains: (1) URL as text, (2) arbitrary string, or (3) URL as text + space + arbitrary string",
+      "description": "used to provide reference to original documentation (if the ksy file is actually an implementation of some documented format).\n\nContains:\n1. URL as text,\n2. arbitrary string, or\n3. URL as text + space + arbitrary string",
       "anyOf": [
         {
           "type": "string"
@@ -298,7 +298,7 @@
         },
         "eos-error": {
           "type": "boolean",
-          "description": "allows the compiler to ignore the lack of a terminator if eos-error is disabled, string reading will stop at either:\n\n(1.) terminator being encountered\n\n(2.) end of stream is reached\n\ndefault is TRUE",
+          "description": "allows the compiler to ignore the lack of a terminator if eos-error is disabled, string reading will stop at either:\n\n1. terminator being encountered\n\n2. end of stream is reached\n\ndefault is TRUE",
           "default": true
         },
         "pos": {
