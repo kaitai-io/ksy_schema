@@ -381,7 +381,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^([a-z0-9_])+$": {
+        "^[a-z][a-z0-9_]*$": {
           "$ref": "#/definitions/TypeSpec"
         }
       }
@@ -408,7 +408,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^([a-z0-9_])+$": {
+        "^[a-z][a-z0-9_]*$": {
           "$ref": "#/definitions/Attribute"
         }
       }
@@ -443,7 +443,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^([a-z0-9_])+$": {
+        "^[a-z][a-z0-9_]*$": {
           "$ref": "#/definitions/EnumSpec"
         }
       }
