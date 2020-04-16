@@ -273,7 +273,7 @@
         "enum": {
           "description": "name of existing enum field data type becomes given enum",
           "type": "string",
-          "pattern": "^[a-z][a-z0-9_]*$"
+          "pattern": "^([a-z][a-z0-9_]*::)*[a-z][a-z0-9_]*$"
         },
         "encoding": {
           "type": "string"
