@@ -134,7 +134,11 @@
                     "^.*$": { "enum": [ "le", "be" ] }
                   }
                 }
-              }
+              },
+              "required": [
+                "switch-on",
+                "cases"
+              ]
             }
           ]
         }
@@ -189,7 +193,11 @@
                     "^.*$": { "$ref": "#/definitions/AnyScalar" }
                   }
                 }
-              }
+              },
+              "required": [
+                "switch-on",
+                "cases"
+              ]
             },
             {
               "type": "string",
