@@ -393,7 +393,12 @@
         "id": { "$ref": "#/definitions/Identifier" },
         "type": { "type": "string" },
         "doc": { "$ref": "#/definitions/Doc" },
-        "doc-ref": { "$ref": "#/definitions/DocRef" }
+        "doc-ref": { "$ref": "#/definitions/DocRef" },
+        "enum": {
+          "description": "path to enum type, which will become the type of the parameter\n\nonly integer-based enums are supported, so `type` must be an integer type (`type: uX`, `type: sX` or `type: bX`, but not `type: b1` = boolean) for this property to work",
+          "type": "string",
+          "pattern": "^([a-z][a-z0-9_]*::)*[a-z][a-z0-9_]*$"
+        }
       },
       "patternProperties": {
         "^-.*$": true
