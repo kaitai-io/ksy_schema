@@ -85,39 +85,105 @@
           "properties": {
             "forensicswiki": {
               "description": "article name at [Forensics Wiki](https://forensicswiki.org/wiki/Main_Page), which is a CC-BY-SA-licensed wiki with information on digital forensics, file formats and tools\n\nfull link name could be generated as `https://forensicswiki.org/wiki/` + this value",
-              "type": "string",
-              "pattern": "^([a-zA-Z0-9$\\-._~+!*'(),@&;:\\/]+|%[0-9a-fA-F]{2})+$",
-              "$comment": "hand-crafted regex, it should match any valid URL path"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^([a-zA-Z0-9$\\-._~+!*'(),@&;:\\/]+|%[0-9a-fA-F]{2})+$",
+                  "$comment": "hand-crafted regex, it should match any valid URL path"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^([a-zA-Z0-9$\\-._~+!*'(),@&;:\\/]+|%[0-9a-fA-F]{2})+$"
+                  }
+                }
+              ]
             },
             "iso": {
               "description": "ISO/IEC standard number, reference to a standard accepted and published by [ISO](https://www.iso.org/) (International Organization for Standardization).\n\nISO standards typically have clear designations like \"ISO/IEC 15948:2004\", so value should be citing everything except for \"ISO/IEC\", i.e. `15948:2004`",
-              "type": "string",
-              "pattern": "^[1-9]\\d*([-–][0-9]+)?(:(19|20)\\d{2})?$",
-              "$comment": "https://www.wikidata.org/wiki/Property:P503#P1793"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[1-9]\\d*([-–][0-9]+)?(:(19|20)\\d{2})?$",
+                  "$comment": "https://www.wikidata.org/wiki/Property:P503#P1793"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[1-9]\\d*([-–][0-9]+)?(:(19|20)\\d{2})?$"
+                  }
+                }
+              ]
             },
             "justsolve": {
               "description": "article name at [\"Just Solve the File Format Problem\" wiki](http://fileformats.archiveteam.org/wiki/Main_Page), a wiki that collects information on many file formats\n\nfull link name could be generated as `http://fileformats.archiveteam.org/wiki/` + this value",
-              "type": "string",
-              "pattern": "^([a-zA-Z0-9$\\-._~+!*'(),@&;:\\/]+|%[0-9a-fA-F]{2})+$",
-              "$comment": "hand-crafted regex, it should match any valid URL path"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^([a-zA-Z0-9$\\-._~+!*'(),@&;:\\/]+|%[0-9a-fA-F]{2})+$",
+                  "$comment": "hand-crafted regex, it should match any valid URL path"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^([a-zA-Z0-9$\\-._~+!*'(),@&;:\\/]+|%[0-9a-fA-F]{2})+$"
+                  }
+                }
+              ]
             },
             "loc": {
               "description": "identifier in [Digital Formats](https://www.loc.gov/preservation/digital/formats/fdd/browse_list.shtml) database of [US Library of Congress](https://www.loc.gov/)\n\nvalue typically looks like `fddXXXXXX`, where `XXXXXX` is a 6-digit identifier",
-              "type": "string",
-              "pattern": "^fdd\\d{6}$",
-              "$comment": "https://www.wikidata.org/wiki/Property:P3266#P1793"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^fdd\\d{6}$",
+                  "$comment": "https://www.wikidata.org/wiki/Property:P3266#P1793"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^fdd\\d{6}$"
+                  }
+                }
+              ]
             },
             "mime": {
               "description": "MIME type (IANA media type), a string typically used in various Internet protocols to specify format of binary payload\n\nthere is a [central registry of media types](https://www.iana.org/assignments/media-types/media-types.xhtml) managed by IANA\n\nvalue must specify full MIME type (both parts), e.g. `image/png`",
-              "type": "string",
-              "pattern": "^(application|audio|font|image|model|text|video)\/([a-zA-Z0-9]+[.\\-_+]?)*[a-zA-Z0-9]$",
-              "$comment": "this regex pattern is hand-crafted and not coming from any specification, but it's tested against all registered discrete IANA media types (multipart types don't make sense for Kaitai Struct)"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^(application|audio|font|image|model|text|video)\/([a-zA-Z0-9]+[.\\-_+]?)*[a-zA-Z0-9]$",
+                  "$comment": "this regex pattern is hand-crafted and not coming from any specification, but it's tested against all registered discrete IANA media types (multipart types don't make sense for Kaitai Struct)"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(application|audio|font|image|model|text|video)\/([a-zA-Z0-9]+[.\\-_+]?)*[a-zA-Z0-9]$"
+                  }
+                }
+              ]
             },
             "pronom": {
               "description": "format identifier in [PRONOM Technical Registry](https://www.nationalarchives.gov.uk/PRONOM/Default.aspx) of [UK National Archives](https://www.nationalarchives.gov.uk/), which is a massive file formats database that catalogues many file formats for digital preservation purposes",
-              "type": "string",
-              "pattern": "^(x-)?fmt\\/\\d+$",
-              "$comment": "https://www.wikidata.org/wiki/Property:P2748#P1793"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^(x-)?fmt\\/\\d+$",
+                  "$comment": "https://www.wikidata.org/wiki/Property:P2748#P1793"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(x-)?fmt\\/\\d+$"
+                  }
+                }
+              ]
             },
             "rfc": {
               "description": "reference to [RFC](https://en.wikipedia.org/wiki/Request_for_Comments), \"Request for Comments\" documents maintained by ISOC (Internet Society)\n\nRFCs are typically treated as global, Internet-wide standards, and, for example, many networking / interoperability protocols are specified in RFCs\n\nvalue should be just raw RFC number, without any prefixes, e.g. `1234`",
@@ -127,14 +193,38 @@
                   "type": "string",
                   "pattern": "^[1-9]\\d*$",
                   "$comment": "https://www.wikidata.org/wiki/Property:P892#P1793"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      { "type": "integer" },
+                      {
+                        "type": "string",
+                        "pattern": "^[1-9]\\d*$",
+                        "$comment": "https://www.wikidata.org/wiki/Property:P892#P1793"
+                      }
+                    ]
+                  }
                 }
               ]
             },
             "wikidata": {
               "description": "item identifier at Wikidata, a global knowledge base\n\nvalue typically follows `Qxxx` pattern, where `xxx` is a number generated by Wikidata, e.g. `Q535473`",
-              "type": "string",
-              "pattern": "^Q[1-9]\\d*$",
-              "$comment": "https://www.wikidata.org/wiki/Q43649390#P1793"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^Q[1-9]\\d*$",
+                  "$comment": "https://www.wikidata.org/wiki/Q43649390#P1793"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^Q[1-9]\\d*$"
+                  }
+                }
+              ]
             }
           },
           "patternProperties": {
