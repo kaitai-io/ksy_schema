@@ -124,7 +124,7 @@
           "additionalProperties": false,
           "properties": {
             "forensicswiki": {
-              "description": "article name at [Forensics Wiki](https://forensicswiki.org/wiki/Main_Page), which is a CC-BY-SA-licensed wiki with information on digital forensics, file formats and tools\n\nfull link name could be generated as `https://forensicswiki.org/wiki/` + this value",
+              "description": "article name at [Forensics Wiki](https://forensicswiki.xyz/page/Main_Page), which is a CC-BY-SA-licensed wiki with information on digital forensics, file formats and tools\n\nfull link name could be generated as `https://forensicswiki.xyz/page/` + this value",
               "anyOf": [
                 { "$ref": "#/definitions/MediaWikiPageName" },
                 {
