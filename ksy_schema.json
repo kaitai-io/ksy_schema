@@ -55,6 +55,46 @@
         }
       ]
     },
+    "MediaWikiPageName": {
+      "type": "string",
+      "pattern": "^([a-zA-Z0-9$\\-._~+!*'(),@&;:\\/]+|%[0-9a-fA-F]{2})+$",
+      "$comment": "hand-crafted regex, it should match any valid URL path"
+    },
+    "IsoIdentifier": {
+      "type": "string",
+      "pattern": "^[1-9]\\d*([-–][0-9]+)?(:(19|20)\\d{2})?$",
+      "$comment": "https://www.wikidata.org/wiki/Property:P503#P1793"
+    },
+    "LocIdentifier": {
+      "type": "string",
+      "pattern": "^fdd\\d{6}$",
+      "$comment": "https://www.wikidata.org/wiki/Property:P3266#P1793"
+    },
+    "MimeType": {
+      "type": "string",
+      "pattern": "^(application|audio|font|image|model|text|video)\/([a-zA-Z0-9]+[.\\-_+]?)*[a-zA-Z0-9]$",
+      "$comment": "this regex pattern is hand-crafted and not coming from any specification, but it's tested against all registered discrete IANA media types (multipart types don't make sense for Kaitai Struct)"
+    },
+    "PronomIdentifier": {
+      "type": "string",
+      "pattern": "^(x-)?fmt\\/\\d+$",
+      "$comment": "https://www.wikidata.org/wiki/Property:P2748#P1793"
+    },
+    "RfcIdentifier": {
+      "anyOf": [
+        { "type": "integer" },
+        {
+          "type": "string",
+          "pattern": "^[1-9]\\d*$",
+          "$comment": "https://www.wikidata.org/wiki/Property:P892#P1793"
+        }
+      ]
+    },
+    "WikidataIdentifier": {
+      "type": "string",
+      "pattern": "^Q[1-9]\\d*$",
+      "$comment": "https://www.wikidata.org/wiki/Q43649390#P1793"
+    },
     "MetaSpec": {
       "type": "object",
       "additionalProperties": false,
@@ -82,6 +122,88 @@
         "xref": {
           "type": "object",
           "additionalProperties": false,
+          "properties": {
+            "forensicswiki": {
+              "description": "article name at [Forensics Wiki](https://forensicswiki.xyz/page/Main_Page), which is a CC-BY-SA-licensed wiki with information on digital forensics, file formats and tools\n\nfull link name could be generated as `https://forensicswiki.xyz/page/` + this value",
+              "anyOf": [
+                { "$ref": "#/definitions/MediaWikiPageName" },
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/MediaWikiPageName" }
+                }
+              ]
+            },
+            "iso": {
+              "description": "ISO/IEC standard number, reference to a standard accepted and published by [ISO](https://www.iso.org/) (International Organization for Standardization).\n\nISO standards typically have clear designations like \"ISO/IEC 15948:2004\", so value should be citing everything except for \"ISO/IEC\", i.e. `15948:2004`",
+              "anyOf": [
+                { "$ref": "#/definitions/IsoIdentifier" },
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/IsoIdentifier" }
+                }
+              ]
+            },
+            "justsolve": {
+              "description": "article name at [\"Just Solve the File Format Problem\" wiki](http://fileformats.archiveteam.org/wiki/Main_Page), a wiki that collects information on many file formats\n\nfull link name could be generated as `http://fileformats.archiveteam.org/wiki/` + this value",
+              "anyOf": [
+                { "$ref": "#/definitions/MediaWikiPageName" },
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/MediaWikiPageName" }
+                }
+              ]
+            },
+            "loc": {
+              "description": "identifier in [Digital Formats](https://www.loc.gov/preservation/digital/formats/fdd/browse_list.shtml) database of [US Library of Congress](https://www.loc.gov/)\n\nvalue typically looks like `fddXXXXXX`, where `XXXXXX` is a 6-digit identifier",
+              "anyOf": [
+                { "$ref": "#/definitions/LocIdentifier" },
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/LocIdentifier" }
+                }
+              ]
+            },
+            "mime": {
+              "description": "MIME type (IANA media type), a string typically used in various Internet protocols to specify format of binary payload\n\nthere is a [central registry of media types](https://www.iana.org/assignments/media-types/media-types.xhtml) managed by IANA\n\nvalue must specify full MIME type (both parts), e.g. `image/png`",
+              "anyOf": [
+                { "$ref": "#/definitions/MimeType" },
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/MimeType" }
+                }
+              ]
+            },
+            "pronom": {
+              "description": "format identifier in [PRONOM Technical Registry](https://www.nationalarchives.gov.uk/PRONOM/Default.aspx) of [UK National Archives](https://www.nationalarchives.gov.uk/), which is a massive file formats database that catalogues many file formats for digital preservation purposes",
+              "anyOf": [
+                { "$ref": "#/definitions/PronomIdentifier" },
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/PronomIdentifier" }
+                }
+              ]
+            },
+            "rfc": {
+              "description": "reference to [RFC](https://en.wikipedia.org/wiki/Request_for_Comments), \"Request for Comments\" documents maintained by ISOC (Internet Society)\n\nRFCs are typically treated as global, Internet-wide standards, and, for example, many networking / interoperability protocols are specified in RFCs\n\nvalue should be just raw RFC number, without any prefixes, e.g. `1234`",
+              "anyOf": [
+                { "$ref": "#/definitions/RfcIdentifier" },
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/RfcIdentifier" }
+                }
+              ]
+            },
+            "wikidata": {
+              "description": "item identifier at Wikidata, a global knowledge base\n\nvalue typically follows `Qxxx` pattern, where `xxx` is a number generated by Wikidata, e.g. `Q535473`",
+              "anyOf": [
+                { "$ref": "#/definitions/WikidataIdentifier" },
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/WikidataIdentifier" }
+                }
+              ]
+            }
+          },
           "patternProperties": {
             "^.*$": {
               "anyOf": [
