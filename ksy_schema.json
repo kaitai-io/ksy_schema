@@ -377,7 +377,10 @@
         },
         "if": {
           "description": "expected to be boolean expression\n\nmarks the attribute as optional (attribute is parsed only if condition specified evaluates to true)",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" },
+            { "type": "boolean" }
+          ]
         },
         "size": {
           "description": "the number of bytes to read if `type` isn't defined.\n\ncan also be an expression",
