@@ -235,6 +235,7 @@
         },
         "imports": {
           "type": "array",
+          "description": "list of relative or absolute paths to another `.ksy` files to import (**without** the `.ksy` extension)\n\nthe top-level type of the imported file will be accessible in the current spec under the name specified in the top-level `/meta/id` of the imported file",
           "items": {
             "type": "string",
             "pattern": "^(.*/)?[a-z][a-z0-9_]*$"
