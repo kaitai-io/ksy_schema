@@ -524,7 +524,7 @@
         "doc": { "$ref": "#/definitions/Doc" },
         "doc-ref": { "$ref": "#/definitions/DocRef" },
         "enum": {
-          "description": "path to enum type, which will become the type of the parameter\n\nonly integer-based enums are supported, so `type` must be an integer type (`type: uX`, `type: sX` or `type: bX`, but not `type: b1` = boolean) for this property to work",
+          "description": "path to an enum type (defined in the `enums` map), which will become the type of the parameter\n\nonly integer-based enums are supported, so `type` must be an integer type (`type: uX`, `type: sX` or `type: bX`) for this property to work\n\nyou can use `enum` with `type: b1` as well: `b1` means a 1-bit **integer** (0 or 1) when used with `enum` (**not** a boolean)\n\none can reference an enum type of a subtype by specifying a relative path to it from the current type, with a double colon as a path delimiter (e.g. `foo::bar::my_enum`)",
           "type": "string",
           "pattern": "^([a-z][a-z0-9_]*::)*[a-z][a-z0-9_]*$"
         }
