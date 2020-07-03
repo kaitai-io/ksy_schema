@@ -299,7 +299,7 @@
           ]
         },
         "type": {
-          "description": "defines data type for an attribute can also be user-defined https://doc.kaitai.io/ksy_reference.html#attribute-type",
+          "description": "defines data type for an attribute\n\nthe type can also be user-defined in the `types` key\n\none can reference a nested user-defined type by specifying a relative path to it from the current type, with a double colon as a path delimiter (e.g. `foo::bar::my_type`)",
           "anyOf": [
             {
               "type": "string"
