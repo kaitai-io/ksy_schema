@@ -358,7 +358,7 @@
           ]
         },
         "repeat": {
-          "description": "designates repeated attribute in a structure\n\n| Value     | Description\n|-\n| `expr`    | repeated amount specifified in `repeat-expr`\n| `eos`     | repeated until the end of the current stream\n| `until`   | repeated until given expression in `repeat-until` is true\n\nattribute read as array/list/sequence",
+          "description": "designates repeated attribute in a structure\n\n| Value     | Description\n|-\n| `eos`     | repeat until the end of the current stream\n| `expr`    | repeat as many times as specified in `repeat-expr`\n| `until`   | repeat until the expression in `repeat-until` becomes **`true`**\n\nattribute read as array/list/sequence",
           "enum": [
             "expr",
             "eos",
