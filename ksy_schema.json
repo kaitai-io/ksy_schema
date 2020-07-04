@@ -388,7 +388,8 @@
           "$ref": "#/definitions/StringOrInteger"
         },
         "size-eos": {
-          "description": "reads all the bytes till the end of the stream",
+          "description": "if `true`, reads all the bytes till the end of the stream\n\ndefault is `false`",
+          "default": false,
           "type": "boolean"
         },
         "process": {
