@@ -370,7 +370,7 @@
           "$ref": "#/definitions/StringOrInteger"
         },
         "repeat-until": {
-          "description": "expression of boolean type\n\nspecifies expression to be checked each time this is parsed, repeating until the expression is false. One can use `_` as a special variable that references the last read element",
+          "description": "specifies a condition to be checked **after** each parsed item, repeating while the expression is `false`\n\none can use `_` in the expression, which is a special **local** variable that references the last read element",
           "anyOf": [
             { "type": "string" },
             { "type": "boolean" }
