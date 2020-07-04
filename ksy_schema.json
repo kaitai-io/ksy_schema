@@ -377,7 +377,7 @@
           ]
         },
         "if": {
-          "description": "expected to be boolean expression\n\nmarks the attribute as optional (attribute is parsed only if condition specified evaluates to true)",
+          "description": "marks the attribute as optional (attribute is parsed only if the condition specified evaluates to `true`)",
           "anyOf": [
             { "type": "string" },
             { "type": "boolean" }
