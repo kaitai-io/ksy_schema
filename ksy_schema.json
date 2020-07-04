@@ -425,7 +425,7 @@
         },
         "eos-error": {
           "type": "boolean",
-          "description": "allows the compiler to ignore the lack of a terminator if eos-error is disabled, string reading will stop at either:\n\n1. terminator being encountered\n\n2. end of stream is reached\n\ndefault is TRUE",
+          "description": "allows the compiler to ignore the lack of a terminator if eos-error is disabled, string reading will stop at either:\n\n1. terminator being encountered\n\n2. end of stream is reached\n\ndefault is `true`",
           "default": true
         },
         "pos": {
