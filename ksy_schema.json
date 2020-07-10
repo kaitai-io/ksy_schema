@@ -277,7 +277,7 @@
         "id": {
           "type": "string",
           "pattern": "^[a-z][a-z0-9_]*$",
-          "description": "contains a string that matches /^[a-z][a-z0-9_]*$/ used to identify one attribute among others"
+          "description": "contains a string used to identify one attribute among others"
         },
         "doc": {
           "$ref": "#/definitions/Doc"
@@ -519,8 +519,13 @@
       "additionalProperties": false,
       "properties": {
         "id": {
-          "type": "string",
-          "pattern": "^[a-z][a-z0-9_]*$"
+          "allOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*$"
+            },
+            { "not": { "enum": ["true", "false", "null"] } }
+          ]
         },
         "type": {
           "description": "specifies \"pure\" type of the parameter, without any serialization details (like endianness, sizes, encodings)\n\n| Value                  | Description\n|-\n| `u1`, `u2`, `u4`, `u8` | unsigned integer\n| `s1`, `s2`, `s4`, `s8` | signed integer\n| `bX`                   | bit-sized integer (if `X` != 1)\n| `f4`, `f8`             | floating point number\n| `type` key missing<br>or `bytes` | byte array\n| `str`                  | string\n| `bool` (or `b1`)       | boolean\n| `struct`               | arbitrary KaitaiStruct-compatible user type\n| `io`                   | KaitaiStream-compatible IO stream\n| `any`                  | allow any type (if target language supports that)\n| other identifier       | user-defined type, without parameters<br>a nested type can be referenced with double colon (e.g. `type: 'foo::bar'`)\n\none can specify arrays by appending `[]` after the type identifier (e.g. `type: u2[]`, `type: 'foo::bar[]'`, `type: struct[]` etc.)",
