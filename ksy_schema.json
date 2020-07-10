@@ -216,7 +216,16 @@
             }
           }
         },
-        "license": { "type": "string" },
+        "license": {
+          "description": "a string or an array of strings which matches one of the identifiers within the [SPDX license list](https://spdx.org/licenses/)",
+          "anyOf": [
+            { "type": "string" },
+            {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          ]
+        },
         "ks-version": {
           "anyOf": [
             { "type": "string" },
