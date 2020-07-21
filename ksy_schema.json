@@ -270,6 +270,59 @@
         "^-.*$": true
       }
     },
+    "TypeRef": {
+      "anyOf": [
+        {
+          "description": "name of or path to existing type name\n\nif name is single path element, then type resolved in such order:\n- from subtypes of current type\n- current type (so, recursive types is possible)\n- parent type\n\none can reference a nested user-defined type by specifying a relative path to it from the current type, with a double colon as a path delimiter (e.g. `foo::bar::my_type`)",
+          "type": "string",
+          "pattern": "^([a-z][a-z0-9_]*::)*[a-z][a-z0-9_]*(\\(.+\\))?$"
+        },
+        { "type": "boolean" },
+        { "type": "null" },
+        {
+          "enum": [
+            "u1",
+
+            "u2",
+            "u2le",
+            "u2be",
+
+            "u4",
+            "u4le",
+            "u4be",
+
+            "u8",
+            "u8le",
+            "u8be",
+
+            "s1",
+
+            "s2",
+            "s2le",
+            "s2be",
+
+            "s4",
+            "s4le",
+            "s4be",
+
+            "s8",
+            "s8le",
+            "s8be",
+
+            "f4",
+            "f4be",
+            "f4le",
+
+            "f8",
+            "f8be",
+            "f8le",
+
+            "str",
+            "strz"
+          ]
+        }
+      ]
+    },
     "Attribute": {
       "additionalProperties": false,
       "type": "object",
@@ -301,9 +354,7 @@
         "type": {
           "description": "defines data type for an attribute\n\nthe type can also be user-defined in the `types` key\n\none can reference a nested user-defined type by specifying a relative path to it from the current type, with a double colon as a path delimiter (e.g. `foo::bar::my_type`)",
           "anyOf": [
-            {
-              "type": "string"
-            },
+            { "$ref": "#/definitions/TypeRef" },
             {
               "type": "object",
               "additionalProperties": false,
@@ -313,46 +364,13 @@
                   "type": "object",
                   "additionalProperties": false,
                   "patternProperties": {
-                    "^.*$": { "$ref": "#/definitions/AnyScalar" }
+                    "^.*$": { "$ref": "#/definitions/TypeRef" }
                   }
                 }
               },
               "required": [
                 "switch-on",
                 "cases"
-              ]
-            },
-            {
-              "type": "string",
-              "enum": [
-                "u1",
-                "u2",
-                "u2le",
-                "u2be",
-                "u4",
-                "u4le",
-                "u4be",
-                "u8",
-                "u8le",
-                "u8be",
-                "s1",
-                "s2",
-                "s2le",
-                "s2be",
-                "s4",
-                "s4le",
-                "s4be",
-                "s8",
-                "s8le",
-                "s8be",
-                "f4",
-                "f4be",
-                "f4le",
-                "f8",
-                "f8be",
-                "f8le",
-                "str",
-                "strz"
               ]
             }
           ]
