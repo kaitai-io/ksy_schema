@@ -99,8 +99,14 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/definitions/Identifier" },
-        "title": { "type": "string" },
+        "id": {
+          "$ref": "#/definitions/Identifier",
+          "description": "unique string that identifies this format. It should be identical to the file name without the `.ksy` extension, for example 'microsoft_pe' for 'microsoft_pe.ksy'. This name is used to infer name of the top-level type when generate the parser\n\nThis field is mandatory on top-level definition and shouldn't be used at nested levels"
+        },
+        "title": {
+          "type": "string",
+          "description": "brief name of the format, for example 'Windows PE executable'"
+        },
         "application": {
           "anyOf": [
             { "type": "string" },
@@ -108,7 +114,8 @@
               "type": "array",
               "items": { "type": "string" }
             }
-          ]
+          ],
+          "description": "name(s) of application(s) that uses this format"
         },
         "file-extension": {
           "anyOf": [
@@ -117,7 +124,8 @@
               "type": "array",
               "items": { "type": "string" }
             }
-          ]
+          ],
+          "description": "file extension(s), usually used for this format, without leading dot and lowercased, for example `exe`"
         },
         "xref": {
           "type": "object",
@@ -235,7 +243,10 @@
             "windows"
           ]
         },
-        "license": { "type": "string" },
+        "license": {
+          "type": "string",
+          "description": "[SPDX expression](https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/)"
+        },
         "ks-version": {
           "anyOf": [
             { "type": "string" },
@@ -260,7 +271,10 @@
             "pattern": "^(.*/)?[a-z][a-z0-9_]*$"
           }
         },
-        "encoding": { "type": "string" },
+        "encoding": {
+          "type": "string",
+          "description": "sets the default encoding for fields of type `str` or `strz` in the current type and its subtypes\n\ncurrently the list of supported encodings are language-dependent. See https://github.com/kaitai-io/kaitai_struct/issues/116 for more info"
+        },
         "endian": {
           "anyOf": [
             { "enum": [ "le", "be" ] },
