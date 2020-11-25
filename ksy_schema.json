@@ -216,6 +216,25 @@
             }
           }
         },
+        "tags": {
+          "type": "array",
+          "description": "list of some identifiers that can give additional information about the format\n\nshould be written in `lowercase-kebab-case` and listed in alphabetical order\n\nshould be used only at the top level",
+          "items": { "type": "string" },
+          "examples": [
+            "android",
+            "archive",
+            "database",
+            "dos",
+            "executable",
+            "filesystem",
+            "firmware",
+            "linux",
+            "log",
+            "macos",
+            "media",
+            "windows"
+          ]
+        },
         "license": { "type": "string" },
         "ks-version": {
           "anyOf": [
@@ -263,7 +282,13 @@
                 "cases"
               ]
             }
-          ]
+          ],
+          "description": "specifies the default byte order used in all fields of type `sX` or `uX` of the defining type and all it's subtypes\n\nthis field is required if you use types `sX` or `uX` without explicitly defined endianness"
+        },
+        "bit-endian": {
+          "enum": [ "le", "be" ],
+          "default": "be",
+          "description": "specifies the default byte order of integers, that unpacked to the bit fields, used in all fields of type `bX` of the current type and all its subtypes\n\nbit-sized integers are readed by reading a byte-sized integers of size `ceil(X/8)` in the specified endian and unpacking bit fields from it\n\nfor better understanding algorithm of parsing please read https://doc.kaitai.io/user_guide.html#_bit_sized_integers"
         }
       },
       "patternProperties": {
