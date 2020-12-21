@@ -101,7 +101,7 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/Identifier",
-          "description": "unique string that identifies this format. It should be identical to the file name without the `.ksy` extension, for example 'microsoft_pe' for 'microsoft_pe.ksy'. This name is used to infer name of the top-level type when generate the parser\n\nThis field is mandatory on top-level definition and shouldn't be used at nested levels"
+          "description": "unique string that identifies this format. It should be identical to the file name without the `.ksy` extension, for example 'microsoft_pe' for 'microsoft_pe.ksy'. This name is used to infer name of the top-level type when generate the parser\n\nThis field is mandatory at the top level and shouldn't be used at nested levels"
         },
         "title": {
           "type": "string",
@@ -125,7 +125,7 @@
               "items": { "type": "string" }
             }
           ],
-          "description": "file extension(s), usually used for this format, without leading dot and lowercased, for example `exe`"
+          "description": "file extension(s), usually used for this format, without leading dot and lowercased (e.g. `exe`)"
         },
         "xref": {
           "type": "object",
@@ -245,7 +245,7 @@
         },
         "license": {
           "type": "string",
-          "description": "[SPDX expression](https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/)"
+          "description": "An [SPDX expression](https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/) which specifies license under which this KSY file is distributed\n\nFor clarify, this is not a license of the original format, but a license of this specific implementation; it does not give any rights to the original format\n\nTechnically, this field is optional but it is strongly recommend to choose license if you want to distribute your work. For example, if you want to place your format into [the gallery](https://github.com/kaitai-io/kaitai_struct_formats), you should specify some license\n\nFiles, generated from KSY by any KS compiler will have the same license"
         },
         "ks-version": {
           "anyOf": [
@@ -297,7 +297,7 @@
               ]
             }
           ],
-          "description": "specifies the default byte order used in all fields of type `sX` or `uX` of the defining type and all it's subtypes\n\nthis field is required if you use types `sX` or `uX` without explicitly defined endianness"
+          "description": "specifies the default byte order used in all fields of type `sX` or `uX` of the defining type and all its subtypes\n\nthis field is required if you use types `sX` or `uX` without explicitly defined endianness"
         },
         "bit-endian": {
           "enum": [ "le", "be" ],
