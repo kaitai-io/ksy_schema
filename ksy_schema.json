@@ -174,7 +174,7 @@
               ]
             },
             "pronom": {
-              "description": "format identifier in [PRONOM Technical Registry](https://www.nationalarchives.gov.uk/PRONOM/Default.aspx) of [UK National Archives](https://www.nationalarchives.gov.uk/), which is a massive file formats database that catalogues many file formats for digital preservation purposes",
+              "description": "format identifier in [PRONOM Technical Registry](https://www.nationalarchives.gov.uk/PRONOM/BasicSearch/proBasicSearch.aspx?status=new) of [UK National Archives](https://www.nationalarchives.gov.uk/), which is a massive file formats database that catalogues many file formats for digital preservation purposes",
               "anyOf": [
                 { "$ref": "#/definitions/PronomIdentifier" },
                 {
