@@ -99,8 +99,14 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/definitions/Identifier" },
-        "title": { "type": "string" },
+        "id": {
+          "$ref": "#/definitions/Identifier",
+          "description": "unique string that identifies this format. It should be identical to the file name without the `.ksy` extension, for example 'microsoft_pe' for 'microsoft_pe.ksy'. This name is used to infer name of the top-level type when generate the parser\n\nThis field is mandatory at the top level and shouldn't be used at nested levels"
+        },
+        "title": {
+          "type": "string",
+          "description": "brief name of the format, for example 'Windows PE executable'"
+        },
         "application": {
           "anyOf": [
             { "type": "string" },
@@ -108,7 +114,8 @@
               "type": "array",
               "items": { "type": "string" }
             }
-          ]
+          ],
+          "description": "name(s) of application(s) that uses this format"
         },
         "file-extension": {
           "anyOf": [
@@ -117,7 +124,8 @@
               "type": "array",
               "items": { "type": "string" }
             }
-          ]
+          ],
+          "description": "file extension(s), usually used for this format, without leading dot and lowercased (e.g. `exe`)"
         },
         "xref": {
           "type": "object",
@@ -216,7 +224,29 @@
             }
           }
         },
-        "license": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "description": "list of some identifiers that can give additional information about the format\n\nshould be written in `lowercase-kebab-case` and listed in alphabetical order\n\nshould be used only at the top level",
+          "items": { "type": "string" },
+          "examples": [
+            "android",
+            "archive",
+            "database",
+            "dos",
+            "executable",
+            "filesystem",
+            "firmware",
+            "linux",
+            "log",
+            "macos",
+            "media",
+            "windows"
+          ]
+        },
+        "license": {
+          "type": "string",
+          "description": "An [SPDX expression](https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/) which specifies license under which this KSY file is distributed\n\nFor clarify, this is not a license of the original format, but a license of this specific implementation; it does not give any rights to the original format\n\nTechnically, this field is optional but it is strongly recommend to choose license if you want to distribute your work. For example, if you want to place your format into [the gallery](https://github.com/kaitai-io/kaitai_struct_formats), you should specify some license\n\nFiles, generated from KSY by any KS compiler will have the same license"
+        },
         "ks-version": {
           "anyOf": [
             { "type": "string" },
@@ -241,7 +271,10 @@
             "pattern": "^(.*/)?[a-z][a-z0-9_]*$"
           }
         },
-        "encoding": { "type": "string" },
+        "encoding": {
+          "type": "string",
+          "description": "sets the default encoding for fields of type `str` or `strz` in the current type and its subtypes\n\ncurrently the list of supported encodings are language-dependent. See https://github.com/kaitai-io/kaitai_struct/issues/116 for more info"
+        },
         "endian": {
           "anyOf": [
             { "enum": [ "le", "be" ] },
@@ -263,7 +296,13 @@
                 "cases"
               ]
             }
-          ]
+          ],
+          "description": "specifies the default byte order used in all fields of type `sX` or `uX` of the defining type and all its subtypes\n\nthis field is required if you use types `sX` or `uX` without explicitly defined endianness"
+        },
+        "bit-endian": {
+          "enum": [ "le", "be" ],
+          "default": "be",
+          "description": "specifies the default byte order of integers, that unpacked to the bit fields, used in all fields of type `bX` of the current type and all its subtypes\n\nbit-sized integers are readed by reading a byte-sized integers of size `ceil(X/8)` in the specified endian and unpacking bit fields from it\n\nfor better understanding algorithm of parsing please read https://doc.kaitai.io/user_guide.html#_bit_sized_integers"
         }
       },
       "patternProperties": {
