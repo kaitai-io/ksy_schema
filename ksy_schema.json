@@ -31,7 +31,7 @@
       "$ref": "#/definitions/InstancesSpec"
     },
     "enums": {
-      "description": "allows for the setup of named enums, mappings of integer constants to symbolic names. Can be used with integer attributes using the enum key.\n\nwould be represented as enum-like construct (or closest equivalent, if target language doesn’t support enums), nested or namespaced in current type/class",
+      "description": "allows for the setup of named enums, mappings of integer constants to symbolic names. Can be used with integer attributes using the enum key.\n\nwould be represented as enum-like construct (or closest equivalent, if target language doesn't support enums), nested or namespaced in current type/class",
       "$ref": "#/definitions/EnumsSpec"
     }
   },
@@ -62,8 +62,8 @@
     },
     "IsoIdentifier": {
       "type": "string",
-      "pattern": "^[1-9]\\d*([-–][0-9]+)?(:(19|20)\\d{2})?$",
-      "$comment": "https://www.wikidata.org/wiki/Property:P503#P1793"
+      "pattern": "^[1-9]\\d*(-[0-9]+)?(:(19|20)\\d{2})?$",
+      "$comment": "https://www.wikidata.org/wiki/Property:P503#P1793, but only allow ASCII hyphen (-), not the Unicode en dash"
     },
     "LocIdentifier": {
       "type": "string",
