@@ -585,7 +585,15 @@
             "id": { "$ref": "#/definitions/Identifier" },
             "doc": { "$ref": "#/definitions/Doc" },
             "doc-ref": { "$ref": "#/definitions/DocRef" },
-            "-orig-id": { "type": "string" }
+            "-orig-id": {
+              "anyOf": [
+                { "type": "string" },
+                {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              ]
+            }
           },
           "required": [
             "id"
