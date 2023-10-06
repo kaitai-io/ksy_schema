@@ -72,8 +72,8 @@
     },
     "MimeType": {
       "type": "string",
-      "pattern": "^(application|audio|font|image|model|text|video)/([a-zA-Z0-9]+[.\\-_+])*[a-zA-Z0-9]+$",
-      "$comment": "this regex pattern is hand-crafted and not coming from any specification, but it's tested against all registered discrete IANA media types (multipart types don't make sense for Kaitai Struct)"
+      "pattern": "^(application|audio|font|image|model|text|video)/([a-zA-Z0-9]+[.\\-_+])*[a-zA-Z0-9]+[.\\-_+]?$",
+      "$comment": "this regex pattern is hand-crafted and not coming from any specification, but it's tested against all registered discrete IANA media types (composite types don't make sense for Kaitai Struct)"
     },
     "PronomIdentifier": {
       "type": "string",
