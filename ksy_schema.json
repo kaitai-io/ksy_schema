@@ -411,7 +411,7 @@
         },
         "valid": {
           "description": "expected value that the parser should encounter at this point (or throw an error). Unlike `contents`, this is the value *after* parsing.",
-          "$ref": "#/definitions/ValidationSPec"
+          "$ref": "#/definitions/ValidationSpec"
         },
         "type": {
           "description": "defines data type for an attribute\n\nthe type can also be user-defined in the `types` key\n\none can reference a nested user-defined type by specifying a relative path to it from the current type, with a double colon as a path delimiter (e.g. `foo::bar::my_type`)",
