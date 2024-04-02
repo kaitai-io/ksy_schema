@@ -410,7 +410,7 @@
           ]
         },
         "valid": {
-          "description": "expected value that the parser should encounter at this point (or throw an error). Unlike `contents`, this is the value *after* parsing.",
+          "description": "condition that the attribute value is expected to satisfy.",
           "$ref": "#/definitions/ValidationSpec"
         },
         "type": {
@@ -668,23 +668,30 @@
     "ValidationSpec": {
       "anyOf": [
         {
-          "type": "integer"
-        },
-        {
-          "type": "string"
+          "description": "Exact value. Shorthand for `eq: value`",
+          "$ref": "#/definitions/AnyScalar"
         },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "eq": {}
+            "eq": {
+              "description": "Exact value this attribute is expected to have",
+              "$ref": "#/definitions/AnyScalar"
+            }
           }
         },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "expr": {}
+            "expr": {
+              "type": "string",
+              "description": "An expression that evaluates to 'true' for the attribute to be considered valid. Refer to the value with `_`",
+              "examples": [
+                "_ % 2 == 0"
+              ]
+            }
           }
         },
         {
@@ -692,7 +699,11 @@
           "additionalProperties": false,
           "properties": {
             "any-of": {
-              "type": "array"
+              "description": "Exact value this attribute is expected to have",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnyScalar"
+              }
             }
           }
         },
