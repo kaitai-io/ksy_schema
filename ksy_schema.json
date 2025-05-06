@@ -219,7 +219,11 @@
         "license": { "type": "string" },
         "ks-version": {
           "anyOf": [
-            { "type": "string" },
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))?$",
+              "$comment": "https://github.com/kaitai-io/kaitai_struct_compiler/commit/aa10f0751e7e26fbb48afd1afc6a8a591268f4d9"
+            },
             { "type": "number" }
           ]
         },
