@@ -218,6 +218,7 @@
         },
         "license": { "type": "string" },
         "ks-version": {
+          "description": "minimum Kaitai Struct compiler (KSC) version required to compile this .ksy file (older versions will refuse to compile and inform the user that they need at least the specified version)\n\nonly versions 0.6 or higher are accepted (KSC 0.6 was the first to support `ks-version`, so there is no point in entering any lower version)\n\nthe value must be sometimes enclosed in quotes to ensure correct interpretation, for example `ks-version: '0.10'` (without the quotes it is parsed as a float in YAML and gets interpreted as 0.1, which will be rejected)",
           "anyOf": [
             {
               "type": "string",
