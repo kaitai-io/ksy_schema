@@ -244,12 +244,21 @@
           "default": false
         },
         "imports": {
-          "type": "array",
           "description": "list of relative or absolute paths to another `.ksy` files to import (**without** the `.ksy` extension)\n\nthe top-level type of the imported file will be accessible in the current spec under the name specified in the top-level `/meta/id` of the imported file",
-          "items": {
-            "type": "string",
-            "pattern": "^(.*/)?[a-z][a-z0-9_]*$"
-          }
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(.*/)?[a-z][a-z0-9_]*$",
+              "$comment": "https://github.com/kaitai-io/kaitai_struct_tests/commit/85973798aa2ffda7008b2359eeb769a11bc90dad"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(.*/)?[a-z][a-z0-9_]*$"
+              }
+            }
+          ]
         },
         "encoding": { "type": "string" },
         "endian": {
