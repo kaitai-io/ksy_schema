@@ -221,8 +221,8 @@
           "anyOf": [
             {
               "type": "string",
-              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))?$",
-              "$comment": "https://github.com/kaitai-io/kaitai_struct_compiler/commit/aa10f0751e7e26fbb48afd1afc6a8a591268f4d9"
+              "pattern": "^(0\\.([1-5][0-9]+|[6-9][0-9]*)|([1-9][0-9]*)\\.(0|[1-9][0-9]*))(\\.(0|[1-9][0-9]*))?$",
+              "$comment": "See 1. https://github.com/kaitai-io/kaitai_struct_compiler/commit/aa10f0751e7e26fbb48afd1afc6a8a591268f4d9 2. https://github.com/kaitai-io/kaitai_struct_compiler/commit/df6463a65df8b78f85f7d37e2bb43a94e1622d68"
             },
             {
               "allOf": [
