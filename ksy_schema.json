@@ -101,11 +101,14 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/Identifier",
-          "description": "unique string that identifies this format\n\nshould be identical to the file name without the `.ksy` extension (e.g. `microsoft_pe` for `microsoft_pe.ksy`)\n\nused to infer the name of the top-level type when generating the parser\n\nrequired at the top level and shouldn't be used at nested levels"
+          "description": "unique string that identifies this format\n\nshould be identical to the file name without the `.ksy` extension (e.g. `microsoft_pe` for `microsoft_pe.ksy`)\n\nused to derive the name of the top-level type when generating parsers\n\nrequired at the top level, shouldn't be used at nested levels"
         },
         "title": {
           "type": "string",
-          "description": "brief name of the format (e.g. `Windows PE executable`)"
+          "description": "brief name of the format",
+          "examples": [
+            "Windows PE executable"
+          ]
         },
         "application": {
           "anyOf": [
@@ -115,7 +118,7 @@
               "items": { "type": "string" }
             }
           ],
-          "description": "name(s) of application(s) that uses this format"
+          "description": "applications that use this format and are typically associated with it"
         },
         "file-extension": {
           "anyOf": [
@@ -125,7 +128,14 @@
               "items": { "type": "string" }
             }
           ],
-          "description": "file extension(s) usually used for this format, without leading dot and lowercased (e.g. `exe`)"
+          "description": "file extensions typically used for this format, without the leading dot and in lowercase letters\n\nshould be sorted from most popular to least popular",
+          "examples": [
+            "exe",
+            [
+              "jpg",
+              "jpeg"
+            ]
+          ]
         },
         "xref": {
           "type": "object",
@@ -226,30 +236,16 @@
         },
         "tags": {
           "type": "array",
-          "description": "list of some identifiers that can give additional information about the format\n\nshould be written in `lowercase_snake_case` and preferably listed in alphabetical order\n\nshould be used only at the top level",
-          "items": { "type": "string" },
-          "examples": [
-            "3d",
-            "android",
-            "archive",
-            "database",
-            "dos",
-            "executable",
-            "font",
-            "filesystem",
-            "firmware",
-            "game",
-            "linux",
-            "log",
-            "macos",
-            "media",
-            "serialization",
-            "windows"
-          ]
+          "description": "list of tags (categories/keywords) that can be assigned to the format\n\nused in the [format gallery](https://github.com/kaitai-io/kaitai_struct_formats) to display formats at https://formats.kaitai.io/ also in categories other than the main one, which corresponds to the directory where the `.ksy` file is located\n\nshould match the directory names in https://github.com/kaitai-io/kaitai_struct_formats\n\nshould be written in `lower_snake_case` and sorted in alphabetical order",
+          "items": { "type": "string" }
         },
         "license": {
           "type": "string",
-          "description": "specifies the license under which the KSY file is distributed\n\nrequired for all KSY specifications in the [format gallery](https://github.com/kaitai-io/kaitai_struct_formats) (otherwise optional, but [highly recommended](https://choosealicense.com/no-permission/))\n\nmust be a valid [SPDX expression](https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/) (however, a single license identifier from [this list](https://spdx.org/licenses/) is usually enough)\n\nto clarify, this is not a license of the original format description, but a license of the particular KSY implementation - if you're writing one, you can choose any open source license you want, regardless of what resources you use (as long as you only reproduce the idea and you don't copy long excerpts); we recommend [`CC0-1.0`](https://spdx.org/licenses/CC0-1.0.html) or [`MIT`](https://spdx.org/licenses/MIT.html)\n\ngenerated files from a KSY spec retain the same license as the original KSY"
+          "description": "license under which the KSY file is released\n\nrequired for all KSY specifications in the [format gallery](https://github.com/kaitai-io/kaitai_struct_formats) (otherwise optional, but [highly recommended](https://choosealicense.com/no-permission/))\n\nmust be a valid [SPDX expression](https://spdx.github.io/spdx-spec/v3.0.1/annexes/spdx-license-expressions/) (however, a single license identifier from [this list](https://spdx.org/licenses/) is usually enough)\n\nto clarify, this is not a license of the original format description, but a license of the particular KSY implementation - if you're writing one, you can choose any open source license you want, regardless of what resources you use (as long as you only reproduce the idea and you don't copy long excerpts); we recommend [`CC0-1.0`](https://spdx.org/licenses/CC0-1.0.html) or [`MIT`](https://spdx.org/licenses/MIT.html)\n\ngenerated files from a KSY spec retain the same license as the original KSY",
+          "examples": [
+            "CC0-1.0",
+            "MIT"
+          ]
         },
         "ks-version": {
           "anyOf": [
@@ -277,7 +273,7 @@
         },
         "encoding": {
           "type": "string",
-          "description": "sets the default encoding for fields of type `str` or `strz` in the current type and its subtypes\n\ncurrently the list of supported encodings is language-dependent (see https://github.com/kaitai-io/kaitai_struct/issues/116 for more info)"
+          "description": "default character encoding for string fields (of type `str` or `strz`) in the current type and its subtypes\n\nshould be one of the canonical encodings from [this list](https://github.com/kaitai-io/kaitai_struct_compiler/blob/0fd43b3c2186f9f87e95efcedfc6e723d82ee274/shared/src/main/scala/io/kaitai/struct/EncodingList.scala), otherwise the compiler will issue a warning (since version 0.11)"
         },
         "endian": {
           "anyOf": [
@@ -301,12 +297,12 @@
               ]
             }
           ],
-          "description": "specifies the default byte order used in all fields of type `sX` or `uX` (where X is 2, 4 or 8) of the defining type and all its subtypes\n\nthis field is required if you use types `sX` or `uX` without an explicit `le` / `be` suffix (e.g. `u2be`)"
+          "description": "default endianness (byte order) of built-in multibyte numeric types, i.e. integers (`sX` and `uX`, where `X` is 2, 4 or 8) and floating-point numbers (`fX`, where `X` is 4 or 8)\n\napplies to the current type and its subtypes\n\nthis key is required if you use any `sX`, `uX` or `fX` types (other than `s1` and `u1`) without an explicit `le` or `be` suffix (as in `u2be` or `f4le`)"
         },
         "bit-endian": {
           "enum": [ "le", "be" ],
           "default": "be",
-          "description": "specifies the default byte order of integers, that unpacked to the bit field members, used in all fields of type `bX` of the current type and all its subtypes\n\nbit-sized integers are read by reading a byte-sized integers of size `ceil(X/8)` in the specified endian and unpacking bit fields from it\n\nfor better understanding algorithm of parsing please read https://doc.kaitai.io/user_guide.html#_bit_sized_integers"
+          "description": "default parsing direction (*bit endianness*) of bit-sized integers (built-in `bX` types)\n\nbig-endian (`be`) order is default, but it is recommended to specify it explicitly\n\ncan only have the literal value `le` or `be` (runtime switching [as with the `meta/endian` key](https://doc.kaitai.io/user_guide.html#calc-endian) is not supported)\n\nfor more information, see https://doc.kaitai.io/user_guide.html#_bit_sized_integers"
         }
       },
       "patternProperties": {
