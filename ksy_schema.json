@@ -322,7 +322,7 @@
         "bit-endian": {
           "enum": [ "le", "be" ],
           "default": "be",
-          "description": "default parsing direction (*bit endianness*) of bit-sized integers (built-in `bX` types)\n\nbig-endian (`be`) order is default, but it is recommended to specify it explicitly\n\ncan only have the literal value `le` or `be` (runtime switching [as with the `meta/endian` key](https://doc.kaitai.io/user_guide.html#calc-endian) is not supported)\n\nfor more information, see https://doc.kaitai.io/user_guide.html#_bit_sized_integers"
+          "description": "default parsing direction (*bit endianness*) of bit-sized integers (built-in `bX` types)\n\nbig-endian (`be`) order is default, but it is recommended to specify it explicitly\n\ncan only have the literal value `le` or `be` (runtime switching [as with the `endian` key](https://doc.kaitai.io/user_guide.html#calc-endian) is not supported)\n\nfor more information, see https://doc.kaitai.io/user_guide.html#_bit_sized_integers"
         }
       },
       "patternProperties": {
