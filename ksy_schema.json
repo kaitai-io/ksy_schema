@@ -336,8 +336,6 @@
           "type": "string",
           "pattern": "^([a-z][a-z0-9_]*::)*[a-z][a-z0-9_]*(\\(.+\\))?$"
         },
-        { "type": "boolean" },
-        { "type": "null" },
         {
           "enum": [
             "u1",
