@@ -99,8 +99,17 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/definitions/Identifier" },
-        "title": { "type": "string" },
+        "id": {
+          "$ref": "#/definitions/Identifier",
+          "description": "unique string that identifies this format\n\nshould be identical to the file name without the `.ksy` extension (e.g. `microsoft_pe` for `microsoft_pe.ksy`)\n\nused to derive the name of the top-level type when generating parsers\n\nrequired at the top level, shouldn't be used at nested levels"
+        },
+        "title": {
+          "type": "string",
+          "description": "brief name of the format",
+          "examples": [
+            "Windows PE executable"
+          ]
+        },
         "application": {
           "anyOf": [
             { "type": "string" },
@@ -108,7 +117,8 @@
               "type": "array",
               "items": { "type": "string" }
             }
-          ]
+          ],
+          "description": "applications that use this format and are typically associated with it"
         },
         "file-extension": {
           "anyOf": [
@@ -117,6 +127,14 @@
               "type": "array",
               "items": { "type": "string" }
             }
+          ],
+          "description": "file extensions typically used for this format, without the leading dot and in lowercase letters\n\nshould be sorted from most popular to least popular",
+          "examples": [
+            "exe",
+            [
+              "jpg",
+              "jpeg"
+            ]
           ]
         },
         "xref": {
@@ -216,7 +234,19 @@
             }
           }
         },
-        "license": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "description": "list of tags (categories/keywords) that can be assigned to the format\n\nused in the [format gallery](https://github.com/kaitai-io/kaitai_struct_formats) to display formats at https://formats.kaitai.io/ also in categories other than the main one, which corresponds to the directory where the `.ksy` file is located\n\nshould match the directory names in https://github.com/kaitai-io/kaitai_struct_formats\n\nshould be written in `lower_snake_case` and sorted in alphabetical order",
+          "items": { "type": "string" }
+        },
+        "license": {
+          "type": "string",
+          "description": "license under which the KSY file is released\n\nrequired for all KSY specifications in the [format gallery](https://github.com/kaitai-io/kaitai_struct_formats) (otherwise optional, but [highly recommended](https://choosealicense.com/no-permission/))\n\nmust be a valid [SPDX expression](https://spdx.github.io/spdx-spec/v3.0.1/annexes/spdx-license-expressions/) (however, a single license identifier from [this list](https://spdx.org/licenses/) is usually enough)\n\nto clarify, this is not a license of the original format description, but a license of the particular KSY implementation - if you're writing one, you can choose any open source license you want, regardless of what resources you use (as long as you only reproduce the idea and you don't copy long excerpts); we recommend [`CC0-1.0`](https://spdx.org/licenses/CC0-1.0.html) or [`MIT`](https://spdx.org/licenses/MIT.html)\n\ngenerated files from a KSY spec retain the same license as the original KSY",
+          "examples": [
+            "CC0-1.0",
+            "MIT"
+          ]
+        },
         "ks-version": {
           "description": "minimum Kaitai Struct compiler (KSC) version required to compile this .ksy file (older versions will refuse to compile and inform the user that they need at least the specified version)\n\nonly versions 0.6 or higher are accepted (KSC 0.6 was the first to support `ks-version`, so there is no point in entering any lower version)\n\nthe value must be sometimes enclosed in quotes to ensure correct interpretation, for example `ks-version: '0.10'` (without the quotes it is parsed as a float in YAML and gets interpreted as 0.1, which will be rejected)",
           "anyOf": [
@@ -260,7 +290,10 @@
             }
           ]
         },
-        "encoding": { "type": "string" },
+        "encoding": {
+          "type": "string",
+          "description": "default character encoding for string fields (of type `str` or `strz`) in the current type and its subtypes\n\nshould be one of the canonical encodings from [this list](https://github.com/kaitai-io/kaitai_struct_compiler/blob/0fd43b3c2186f9f87e95efcedfc6e723d82ee274/shared/src/main/scala/io/kaitai/struct/EncodingList.scala), otherwise the compiler will issue a warning (since version 0.11)"
+        },
         "endian": {
           "anyOf": [
             { "enum": [ "le", "be" ] },
@@ -282,7 +315,13 @@
                 "cases"
               ]
             }
-          ]
+          ],
+          "description": "default endianness (byte order) of built-in multibyte numeric types, i.e. integers (`sX` and `uX`, where `X` is 2, 4 or 8) and floating-point numbers (`fX`, where `X` is 4 or 8)\n\napplies to the current type and its subtypes\n\nthis key is required if you use any `sX`, `uX` or `fX` types (other than `s1` and `u1`) without an explicit `le` or `be` suffix (as in `u2be` or `f4le`)"
+        },
+        "bit-endian": {
+          "enum": [ "le", "be" ],
+          "default": "be",
+          "description": "default parsing direction (*bit endianness*) of bit-sized integers (built-in `bX` types)\n\nbig-endian (`be`) order is default, but it is recommended to specify it explicitly\n\ncan only have the literal value `le` or `be` (runtime switching [as with the `meta/endian` key](https://doc.kaitai.io/user_guide.html#calc-endian) is not supported)\n\nfor more information, see https://doc.kaitai.io/user_guide.html#_bit_sized_integers"
         }
       },
       "patternProperties": {
