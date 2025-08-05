@@ -37,7 +37,7 @@ jobs:
         # Written to work with https://github.com/kaitai-io/kaitai_struct_compiler/blob/56582ef65ca869ca43a1691a496bf4989f938675/shared/src/main/scala/io/kaitai/struct/EncodingList.scala
         run: |
           echo 'java.nio.file.Files.write(java.nio.file.Paths.get("encodings.min.json"), io.kaitai.struct.JSON.stringify(io.kaitai.struct.EncodingList.canonicalToAliasEntries.map(_._1)).getBytes(java.nio.charset.StandardCharsets.UTF_8))' \
-            | sbt compilerJVM/console
+            | sbt --error compilerJVM/console
           jq . encodings.min.json > encodings.json
           rm -f encodings.min.json
 
