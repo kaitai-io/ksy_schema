@@ -1,0 +1,46 @@
+name: Check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request: {}
+
+jobs:
+  check-encodings:
+    name: Check that the encoding list is up-to-date with KSC
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out ksy_schema
+        uses: actions/checkout@v4
+        with:
+          path: ksy_schema
+      - name: Get list of encodings from ksy_schema
+        working-directory: ksy_schema
+        run: |
+          jq '.definitions.CharacterEncoding.enum' ksy_schema.json > encodings.json
+
+      - name: Check out compiler
+        uses: actions/checkout@v4
+        with:
+          repository: kaitai-io/kaitai_struct_compiler
+          path: compiler
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: sbt/setup-sbt@v1
+      - name: Get list of canonical encodings from KSC
+        working-directory: compiler
+        # Written to work with https://github.com/kaitai-io/kaitai_struct_compiler/blob/56582ef65ca869ca43a1691a496bf4989f938675/shared/src/main/scala/io/kaitai/struct/EncodingList.scala
+        run: |
+          echo 'java.nio.file.Files.write(java.nio.file.Paths.get("encodings.min.json"), io.kaitai.struct.JSON.stringify(io.kaitai.struct.EncodingList.canonicalToAliasEntries.map(_._1)).getBytes(java.nio.charset.StandardCharsets.UTF_8))' \
+            | sbt compilerJVM/console
+          jq . encodings.min.json > encodings.json
+          rm -f encodings.min.json
+
+      - name: Compare encoding lists in ksy_schema and KSC
+        run: |
+          git diff --no-index --exit-code -- ksy_schema/encodings.json compiler/encodings.json

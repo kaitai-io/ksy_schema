@@ -292,8 +292,8 @@
           ]
         },
         "encoding": {
-          "type": "string",
-          "description": "default character encoding for string fields (of type `str` or `strz`) in the current type and its subtypes\n\nshould be one of the canonical encodings from [this list](https://github.com/kaitai-io/kaitai_struct_compiler/blob/0fd43b3c2186f9f87e95efcedfc6e723d82ee274/shared/src/main/scala/io/kaitai/struct/EncodingList.scala), otherwise the compiler will issue a warning (since version 0.11)"
+          "$ref": "#/definitions/CharacterEncoding",
+          "description": "default character encoding for string fields (of type `str` or `strz`) in the current type and its subtypes"
         },
         "endian": {
           "anyOf": [
@@ -479,7 +479,7 @@
           "pattern": "^([a-z][a-z0-9_]*::)*[a-z][a-z0-9_]*$"
         },
         "encoding": {
-          "type": "string"
+          "$ref": "#/definitions/CharacterEncoding"
         },
         "pad-right": {
           "type": "integer",
@@ -691,6 +691,44 @@
         { "type": "integer" },
         { "type": "boolean" },
         { "type": "null" }
+      ]
+    },
+    "CharacterEncoding": {
+      "description": "canonical names of character encodings supported by Kaitai Struct\n\nin addition to these canonical names, the compiler (since version 0.11) also recognizes their popular aliases, but issues a warning for them",
+      "$comment": "the `enum` list must be kept in sync with https://github.com/kaitai-io/kaitai_struct_compiler/blob/master/shared/src/main/scala/io/kaitai/struct/EncodingList.scala",
+      "enum": [
+        "ASCII",
+        "UTF-8",
+        "UTF-16LE",
+        "UTF-16BE",
+        "UTF-32LE",
+        "UTF-32BE",
+        "ISO-8859-1",
+        "ISO-8859-2",
+        "ISO-8859-3",
+        "ISO-8859-4",
+        "ISO-8859-5",
+        "ISO-8859-6",
+        "ISO-8859-7",
+        "ISO-8859-8",
+        "ISO-8859-9",
+        "ISO-8859-10",
+        "ISO-8859-11",
+        "ISO-8859-13",
+        "ISO-8859-14",
+        "ISO-8859-15",
+        "ISO-8859-16",
+        "windows-1250",
+        "windows-1251",
+        "windows-1252",
+        "windows-1253",
+        "windows-1254",
+        "windows-1255",
+        "windows-1256",
+        "windows-1257",
+        "windows-1258",
+        "IBM437",
+        "IBM866"
       ]
     }
   }
