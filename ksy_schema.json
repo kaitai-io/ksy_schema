@@ -293,7 +293,7 @@
         },
         "encoding": {
           "$ref": "#/definitions/CharacterEncoding",
-          "description": "default character encoding for string fields (of type `str` or `strz`) in the current type and its subtypes\n\nshould be one of the canonical encodings from [this list](https://github.com/kaitai-io/kaitai_struct_compiler/blob/0fd43b3c2186f9f87e95efcedfc6e723d82ee274/shared/src/main/scala/io/kaitai/struct/EncodingList.scala), otherwise the compiler will issue a warning (since version 0.11)"
+          "description": "default character encoding for string fields (of type `str` or `strz`) in the current type and its subtypes"
         },
         "endian": {
           "anyOf": [
