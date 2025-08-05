@@ -6,15 +6,20 @@ on:
       - master
   pull_request: {}
 
+permissions: {}
+
 jobs:
   check-encodings:
     name: Check that the encoding list is up-to-date with KSC
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Check out ksy_schema
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           path: ksy_schema
       - name: Get list of encodings from ksy_schema
         working-directory: ksy_schema
@@ -24,6 +29,7 @@ jobs:
       - name: Check out compiler
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           repository: kaitai-io/kaitai_struct_compiler
           path: compiler
       - name: Set up JDK
