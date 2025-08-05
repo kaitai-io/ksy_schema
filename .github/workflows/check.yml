@@ -19,7 +19,7 @@ jobs:
       - name: Get list of encodings from ksy_schema
         working-directory: ksy_schema
         run: |
-          jq '.definitions.CharacterEncoding.enum' ksy_schema.json > encodings.json
+          jq '.definitions.CharacterEncoding.enum' ksy_schema.json | tee encodings.json
 
       - name: Check out compiler
         uses: actions/checkout@v4
@@ -40,6 +40,8 @@ jobs:
             | sbt --error compilerJVM/console
           jq . encodings.min.json > encodings.json
           rm -f encodings.min.json
+          echo
+          cat encodings.json
 
       - name: Compare encoding lists in ksy_schema and KSC
         run: |
