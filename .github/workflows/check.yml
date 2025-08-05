@@ -43,4 +43,4 @@ jobs:
 
       - name: Compare encoding lists in ksy_schema and KSC
         run: |
-          git diff --no-index --exit-code -- ksy_schema/encodings.json compiler/encodings.json
+          git diff --color=always --no-index --exit-code -- ksy_schema/encodings.json compiler/encodings.json
