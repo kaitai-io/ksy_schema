@@ -694,6 +694,8 @@
       ]
     },
     "CharacterEncoding": {
+      "description": "canonical names of character encodings supported by Kaitai Struct\n\nin addition to these canonical names, the compiler (since version 0.11) also recognizes their popular aliases, but issues a warning for them",
+      "$comment": "the `enum` list must be kept in sync with https://github.com/kaitai-io/kaitai_struct_compiler/blob/master/shared/src/main/scala/io/kaitai/struct/EncodingList.scala",
       "enum": [
         "ASCII",
         "UTF-8",
