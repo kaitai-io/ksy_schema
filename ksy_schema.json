@@ -695,14 +695,14 @@
     },
     "CharacterEncoding": {
       "description": "canonical names of character encodings supported by Kaitai Struct\n\nin addition to these canonical names, the compiler (since version 0.11) also recognizes their popular aliases, but issues a warning for them",
-      "$comment": "the `enum` list must be kept in sync with https://github.com/kaitai-io/kaitai_struct_compiler/blob/master/shared/src/main/scala/io/kaitai/struct/EncodingList.scala",
+      "$comment": "the `enum` list must be kept in sync with https://github.com/kaitai-io/kaitai_struct_compiler/blob/master/shared/src/main/scala/io/kaitai/struct/EncodingList.scala - the CI workflow [`check.yml`](https://github.com/kaitai-io/ksy_schema/blob/master/.github/workflows/check.yml) checks this",
       "enum": [
         "ASCII",
         "UTF-8",
-        "UTF-16LE",
         "UTF-16BE",
-        "UTF-32LE",
+        "UTF-16LE",
         "UTF-32BE",
+        "UTF-32LE",
         "ISO-8859-1",
         "ISO-8859-2",
         "ISO-8859-3",
@@ -728,7 +728,10 @@
         "windows-1257",
         "windows-1258",
         "IBM437",
-        "IBM866"
+        "IBM866",
+        "Shift_JIS",
+        "Big5",
+        "EUC-KR"
       ]
     }
   }
