@@ -6,6 +6,15 @@ on:
       - master
   pull_request: {}
 
+  # Allow this workflow to be triggered via a `POST` request to
+  # `https://api.github.com/repos/kaitai-io/ksy_schema/dispatches`. This is
+  # performed by the CI workflow
+  # https://github.com/kaitai-io/kaitai_struct_compiler/blob/6a1a7e25914cf9abe1f3807bff63f155dcfc7806/.github/workflows/encoding-list-updated.yml
+  # when the source file `EncodingList.scala` in KSC is updated.
+  repository_dispatch:
+    types:
+      - EncodingList-updated
+
 permissions: {}
 
 jobs:
