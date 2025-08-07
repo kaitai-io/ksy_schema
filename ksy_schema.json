@@ -410,7 +410,7 @@
           ]
         },
         "valid": {
-          "description": "condition that the attribute value is expected to satisfy.",
+          "description": "validation constraints that the actual value of the attribute must satisfy, otherwise a subclass of `ValidationFailedError` will be raised",
           "$ref": "#/definitions/ValidationSpec"
         },
         "type": {
@@ -668,7 +668,7 @@
     "ValidationSpec": {
       "anyOf": [
         {
-          "description": "Exact value. Shorthand for `eq: value`",
+          "description": "expression that specifies the only valid value for this attribute\n\nshorthand for `eq: value`\n\nif the actual value does not satisfy this constraint, a `ValidationNotEqualError` exception will be thrown",
           "$ref": "#/definitions/AnyScalar"
         },
         {
@@ -676,7 +676,7 @@
           "additionalProperties": false,
           "properties": {
             "eq": {
-              "description": "Exact value this attribute is expected to have",
+              "description": "expression that specifies the only valid value for this attribute\n\nmore explicit, long form of `valid: value`\n\nif the actual value does not satisfy this constraint, a `ValidationNotEqualError` exception will be thrown",
               "$ref": "#/definitions/AnyScalar"
             }
           }
@@ -687,7 +687,7 @@
           "properties": {
             "expr": {
               "type": "string",
-              "description": "An expression that evaluates to 'true' for the attribute to be considered valid. Refer to the value with `_`",
+              "description": "boolean expression that must evaluate to `true` for the attribute value to be considered valid\n\nactual value can be referenced via a special built-in local variable `_`\n\nfor better declarativeness, it should only be used to enforce validation constraints that cannot be captured by any of the other dedicated `valid` subkeys (in other words, other subkeys should be preferred: for example, prefer `max: 5` to `expr: _ <= 5`)\n\nif the actual value does not satisfy this constraint, a `ValidationExprError` exception will be thrown",
               "examples": [
                 "_ % 2 == 0"
               ]
@@ -699,7 +699,7 @@
           "additionalProperties": false,
           "properties": {
             "any-of": {
-              "description": "Exact value this attribute is expected to have",
+              "description": "list of expressions that specify a set of valid values for this attribute (the actual value must be equal to **any of** the values in the list)\n\nif the actual value does not satisfy this constraint, a `ValidationNotAnyOfError` exception will be thrown",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AnyScalar"
@@ -724,10 +724,12 @@
           ],
           "properties": {
             "min": {
-              "description": "minimum value (inclusive)"
+              "description": "expression that specifies the **minimum** valid value for this attribute\n\nactual value must be greater than or equal to this value (i.e. `min: value` is functionally equivalent to `expr: _ >= value`)\n\nif the actual value does not satisfy this constraint, a `ValidationLessThanError` exception will be thrown\n\ncan be combined with the `max` key to specify a range",
+              "$ref": "#/definitions/AnyScalar"
             },
             "max": {
-              "description": "maximum value (inclusive)"
+              "description": "expression that specifies the **maximum** valid value for this attribute\n\nactual value must be less than or equal to this value (i.e. `max: value` is functionally equivalent to `expr: _ <= value`)\n\nif the actual value does not satisfy this constraint, a `ValidationGreaterThanError` exception will be thrown\n\ncan be combined with the `min` key to specify a range",
+              "$ref": "#/definitions/AnyScalar"
             }
           }
         }
