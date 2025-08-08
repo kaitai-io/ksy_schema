@@ -548,6 +548,22 @@
               }
             ]
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "valid": {
+                "type": "object",
+                "required": [
+                  "in-enum"
+                ]
+              }
+            },
+            "required": ["valid"]
+          },
+          "then": {
+            "required": ["enum"]
+          }
         }
       ]
     },
