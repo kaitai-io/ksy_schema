@@ -732,6 +732,19 @@
               "$ref": "#/definitions/AnyScalar"
             }
           }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "in-enum"
+          ],
+          "properties": {
+            "in-enum": {
+              "description": "consider only values defined in the enum as valid\n\ncan only be used on enum attributes (i.e. those that use the `enum` key)\n\nif the actual integer value does not correspond to any defined member of the enum, a `ValidationNotInEnumError` exception will be thrown",
+              "const": true
+            }
+          }
         }
       ]
     },
