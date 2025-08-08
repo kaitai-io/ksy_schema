@@ -690,6 +690,9 @@
         {
           "type": "object",
           "additionalProperties": false,
+          "required": [
+            "eq"
+          ],
           "properties": {
             "eq": {
               "description": "expression that specifies the only valid value for this attribute\n\nmore explicit, long form of `valid: value`\n\nif the actual value does not satisfy this constraint, a `ValidationNotEqualError` exception will be thrown",
@@ -700,6 +703,9 @@
         {
           "type": "object",
           "additionalProperties": false,
+          "required": [
+            "expr"
+          ],
           "properties": {
             "expr": {
               "type": "string",
@@ -713,6 +719,9 @@
         {
           "type": "object",
           "additionalProperties": false,
+          "required": [
+            "any-of"
+          ],
           "properties": {
             "any-of": {
               "description": "list of expressions that specify a set of valid values for this attribute (the actual value must be equal to **any of** the values in the list)\n\nif the actual value does not satisfy this constraint, a `ValidationNotAnyOfError` exception will be thrown",
@@ -728,14 +737,10 @@
           "additionalProperties": false,
           "anyOf": [
             {
-              "required": [
-                "min"
-              ]
+              "required": ["min"]
             },
             {
-              "required": [
-                "max"
-              ]
+              "required": ["max"]
             }
           ],
           "properties": {
