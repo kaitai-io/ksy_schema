@@ -708,8 +708,11 @@
           ],
           "properties": {
             "expr": {
-              "type": "string",
               "description": "boolean expression that must evaluate to `true` for the attribute value to be considered valid\n\nactual value can be referenced via a special built-in local variable `_`\n\nfor better declarativeness, it should only be used to enforce validation constraints that cannot be captured by any of the other dedicated `valid` subkeys (in other words, other subkeys should be preferred: for example, prefer `max: 5` to `expr: _ <= 5`)\n\nif the actual value does not satisfy this constraint, a `ValidationExprError` exception will be thrown",
+              "anyOf": [
+                { "type": "string" },
+                { "type": "boolean" }
+              ],
               "examples": [
                 "_ % 2 == 0"
               ]
