@@ -38,7 +38,7 @@
     }
   },
   "patternProperties": {
-    "^-.*$": true
+    "^-": true
   },
   "additionalProperties": false,
   "definitions": {
@@ -336,7 +336,7 @@
         }
       },
       "patternProperties": {
-        "^-.*$": true
+        "^-": true
       },
       "additionalProperties": false
     },
@@ -535,7 +535,7 @@
         }
       },
       "patternProperties": {
-        "^-.*$": true
+        "^-": true
       },
       "additionalProperties": false,
       "allOf": [
@@ -618,7 +618,7 @@
         "enums": { "$ref": "#/definitions/EnumsSpec" }
       },
       "patternProperties": {
-        "^-.*$": true
+        "^-": true
       },
       "additionalProperties": false
     },
@@ -659,7 +659,7 @@
         }
       },
       "patternProperties": {
-        "^-.*$": true
+        "^-": true
       },
       "additionalProperties": false
     },
@@ -699,7 +699,7 @@
             }
           },
           "patternProperties": {
-            "^-.*$": true
+            "^-": true
           },
           "additionalProperties": false
         }
