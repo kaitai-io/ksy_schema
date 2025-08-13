@@ -310,6 +310,10 @@
             { "enum": [ "le", "be" ] },
             {
               "type": "object",
+              "required": [
+                "switch-on",
+                "cases"
+              ],
               "properties": {
                 "switch-on": { "$ref": "#/definitions/AnyScalar" },
                 "cases": {
@@ -320,11 +324,7 @@
                   "additionalProperties": false
                 }
               },
-              "additionalProperties": false,
-              "required": [
-                "switch-on",
-                "cases"
-              ]
+              "additionalProperties": false
             }
           ],
           "description": "default endianness (byte order) of built-in multibyte numeric types, i.e. integers (`sX` and `uX`, where `X` is 2, 4 or 8) and floating-point numbers (`fX`, where `X` is 4 or 8)\n\napplies to the current type and its subtypes\n\nthis key is required if you use any `sX`, `uX` or `fX` types (other than `s1` and `u1`) without an explicit `le` or `be` suffix (as in `u2be` or `f4le`)"
@@ -429,6 +429,10 @@
             { "$ref": "#/definitions/TypeRef" },
             {
               "type": "object",
+              "required": [
+                "switch-on",
+                "cases"
+              ],
               "properties": {
                 "switch-on": { "$ref": "#/definitions/AnyScalar" },
                 "cases": {
@@ -439,10 +443,6 @@
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "switch-on",
-                "cases"
-              ],
               "additionalProperties": false
             }
           ]
@@ -541,10 +541,12 @@
       "allOf": [
         {
           "if": {
+            "required": [
+              "type"
+            ],
             "properties": {
               "type": { "const": "strz" }
-            },
-            "required": ["type"]
+            }
           },
           "then": {
             "not": { "required": [ "terminator" ] }
@@ -556,16 +558,21 @@
             "anyOf": [
               { "required": ["size"] },
               {
+                "required": [
+                  "size-eos"
+                ],
                 "properties": {
                   "size-eos": { "const": true }
-                },
-                "required": ["size-eos"]
+                }
               }
             ]
           }
         },
         {
           "if": {
+            "required": [
+              "valid"
+            ],
             "properties": {
               "valid": {
                 "type": "object",
@@ -573,8 +580,7 @@
                   "in-enum"
                 ]
               }
-            },
-            "required": ["valid"]
+            }
           },
           "then": {
             "required": ["enum"]
@@ -627,6 +633,9 @@
     },
     "ParamSpec": {
       "type": "object",
+      "required": [
+        "id"
+      ],
       "properties": {
         "id": {
           "allOf": [
@@ -652,8 +661,7 @@
       "patternProperties": {
         "^-.*$": true
       },
-      "additionalProperties": false,
-      "required": ["id"]
+      "additionalProperties": false
     },
     "ParamsSpec": {
       "type": "array",
@@ -673,6 +681,9 @@
         { "$ref": "#/definitions/Identifier" },
         {
           "type": "object",
+          "required": [
+            "id"
+          ],
           "properties": {
             "id": { "$ref": "#/definitions/Identifier" },
             "doc": { "$ref": "#/definitions/Doc" },
@@ -687,9 +698,6 @@
               ]
             }
           },
-          "required": [
-            "id"
-          ],
           "patternProperties": {
             "^-.*$": true
           },
