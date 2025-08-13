@@ -728,6 +728,9 @@
               "$ref": "#/definitions/AnyScalar"
             }
           },
+          "patternProperties": {
+            "^-": true
+          },
           "additionalProperties": false
         },
         {
@@ -747,6 +750,9 @@
               ]
             }
           },
+          "patternProperties": {
+            "^-": true
+          },
           "additionalProperties": false
         },
         {
@@ -762,6 +768,9 @@
                 "$ref": "#/definitions/AnyScalar"
               }
             }
+          },
+          "patternProperties": {
+            "^-": true
           },
           "additionalProperties": false
         },
@@ -785,6 +794,9 @@
               "$ref": "#/definitions/AnyScalar"
             }
           },
+          "patternProperties": {
+            "^-": true
+          },
           "additionalProperties": false
         },
         {
@@ -797,6 +809,9 @@
               "description": "consider only values defined in the enum as valid\n\ncan only be used on enum attributes (i.e. those that use the `enum` key)\n\nif the actual integer value does not correspond to any defined member of the enum, a `ValidationNotInEnumError` exception will be thrown",
               "const": true
             }
+          },
+          "patternProperties": {
+            "^-": true
           },
           "additionalProperties": false
         }
