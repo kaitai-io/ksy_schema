@@ -17,6 +17,9 @@
     "doc-ref": {
       "$ref": "#/definitions/DocRef"
     },
+    "to-string": {
+      "$ref": "#/definitions/ToString"
+    },
     "params": { "$ref": "#/definitions/ParamsSpec" },
     "seq": {
       "description": "identifier for a primary structure described in top-level map",
@@ -53,6 +56,14 @@
           "type": "array",
           "items": { "type": "string" }
         }
+      ]
+    },
+    "ToString": {
+      "description": "expression that provides a human-readable string representation of an object of this user-defined type for debugging purposes\n\nit will be used to override the standard method for converting an object to a string called `toString()` (or similar) in most target languages, `__str__()` in Python and `to_s` in Ruby; in Rust, it is the `Display` trait",
+      "type": "string",
+      "examples": [
+        "f\"{file_name} ({file_size} bytes)\"",
+        "file_name + \" (\" + file_size.to_s + \" bytes)\""
       ]
     },
     "MediaWikiPageName": {
@@ -590,6 +601,7 @@
         "meta": { "$ref": "#/definitions/MetaSpec" },
         "doc": { "$ref": "#/definitions/Doc" },
         "doc-ref": { "$ref": "#/definitions/DocRef" },
+        "to-string": { "$ref": "#/definitions/ToString" },
         "params": { "$ref": "#/definitions/ParamsSpec" },
         "seq": { "$ref": "#/definitions/Attributes" },
         "instances": { "$ref": "#/definitions/InstancesSpec" },
