@@ -3,7 +3,6 @@
   "title": "ksy schema",
   "description": "the schema for ksy files",
   "type": "object",
-  "additionalProperties": false,
   "properties": {
     "meta": {
       "$ref": "#/definitions/MetaSpec",
@@ -41,6 +40,7 @@
   "patternProperties": {
     "^-.*$": true
   },
+  "additionalProperties": false,
   "definitions": {
     "Doc": {
       "type": "string",
@@ -108,7 +108,6 @@
     },
     "MetaSpec": {
       "type": "object",
-      "additionalProperties": false,
       "properties": {
         "id": {
           "$ref": "#/definitions/Identifier",
@@ -150,7 +149,6 @@
         },
         "xref": {
           "type": "object",
-          "additionalProperties": false,
           "properties": {
             "forensicswiki": {
               "description": "article name at [Forensics Wiki](https://forensics.wiki/), which is a CC-BY-SA-licensed wiki with information on digital forensics, file formats and tools\n\nfull link name could be generated as `https://forensics.wiki/` + this value + `/`",
@@ -243,7 +241,8 @@
                 }
               ]
             }
-          }
+          },
+          "additionalProperties": false
         },
         "tags": {
           "type": "array",
@@ -311,17 +310,17 @@
             { "enum": [ "le", "be" ] },
             {
               "type": "object",
-              "additionalProperties": false,
               "properties": {
                 "switch-on": { "$ref": "#/definitions/AnyScalar" },
                 "cases": {
                   "type": "object",
-                  "additionalProperties": false,
                   "patternProperties": {
                     "^.*$": { "enum": [ "le", "be" ] }
-                  }
+                  },
+                  "additionalProperties": false
                 }
               },
+              "additionalProperties": false,
               "required": [
                 "switch-on",
                 "cases"
@@ -338,7 +337,8 @@
       },
       "patternProperties": {
         "^-.*$": true
-      }
+      },
+      "additionalProperties": false
     },
     "TypeRef": {
       "anyOf": [
@@ -392,7 +392,6 @@
       ]
     },
     "Attribute": {
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "id": {
@@ -430,21 +429,21 @@
             { "$ref": "#/definitions/TypeRef" },
             {
               "type": "object",
-              "additionalProperties": false,
               "properties": {
                 "switch-on": { "$ref": "#/definitions/AnyScalar" },
                 "cases": {
                   "type": "object",
-                  "additionalProperties": false,
                   "patternProperties": {
                     "^.*$": { "$ref": "#/definitions/TypeRef" }
-                  }
+                  },
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "switch-on",
                 "cases"
-              ]
+              ],
+              "additionalProperties": false
             }
           ]
         },
@@ -538,6 +537,7 @@
       "patternProperties": {
         "^-.*$": true
       },
+      "additionalProperties": false,
       "allOf": [
         {
           "if": {
@@ -600,7 +600,6 @@
     },
     "TypeSpec": {
       "type": "object",
-      "additionalProperties": false,
       "properties": {
         "meta": { "$ref": "#/definitions/MetaSpec" },
         "doc": { "$ref": "#/definitions/Doc" },
@@ -614,20 +613,20 @@
       },
       "patternProperties": {
         "^-.*$": true
-      }
+      },
+      "additionalProperties": false
     },
     "TypesSpec": {
       "type": "object",
-      "additionalProperties": false,
       "patternProperties": {
         "^[a-z][a-z0-9_]*$": {
           "$ref": "#/definitions/TypeSpec"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ParamSpec": {
       "type": "object",
-      "additionalProperties": false,
       "properties": {
         "id": {
           "allOf": [
@@ -653,6 +652,7 @@
       "patternProperties": {
         "^-.*$": true
       },
+      "additionalProperties": false,
       "required": ["id"]
     },
     "ParamsSpec": {
@@ -661,19 +661,18 @@
     },
     "InstancesSpec": {
       "type": "object",
-      "additionalProperties": false,
       "patternProperties": {
         "^[a-z][a-z0-9_]*$": {
           "$ref": "#/definitions/Attribute"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnumValueSpec": {
       "anyOf": [
         { "$ref": "#/definitions/Identifier" },
         {
           "type": "object",
-          "additionalProperties": false,
           "properties": {
             "id": { "$ref": "#/definitions/Identifier" },
             "doc": { "$ref": "#/definitions/Doc" },
@@ -693,7 +692,8 @@
           ],
           "patternProperties": {
             "^-.*$": true
-          }
+          },
+          "additionalProperties": false
         }
       ]
     },
@@ -705,7 +705,6 @@
         },
         {
           "type": "object",
-          "additionalProperties": false,
           "required": [
             "eq"
           ],
@@ -714,11 +713,11 @@
               "description": "expression that specifies the only valid value for this attribute\n\nmore explicit, long form of `valid: value`\n\nif the actual value does not satisfy this constraint, a `ValidationNotEqualError` exception will be thrown",
               "$ref": "#/definitions/AnyScalar"
             }
-          }
+          },
+          "additionalProperties": false
         },
         {
           "type": "object",
-          "additionalProperties": false,
           "required": [
             "expr"
           ],
@@ -733,11 +732,11 @@
                 "_ % 2 == 0"
               ]
             }
-          }
+          },
+          "additionalProperties": false
         },
         {
           "type": "object",
-          "additionalProperties": false,
           "required": [
             "any-of"
           ],
@@ -749,11 +748,11 @@
                 "$ref": "#/definitions/AnyScalar"
               }
             }
-          }
+          },
+          "additionalProperties": false
         },
         {
           "type": "object",
-          "additionalProperties": false,
           "anyOf": [
             {
               "required": ["min"]
@@ -771,11 +770,11 @@
               "description": "expression that specifies the **maximum** valid value for this attribute\n\nactual value must be less than or equal to this value (i.e. `max: value` is functionally equivalent to `expr: _ <= value`)\n\nif the actual value does not satisfy this constraint, a `ValidationGreaterThanError` exception will be thrown\n\ncan be combined with the `min` key to specify a range",
               "$ref": "#/definitions/AnyScalar"
             }
-          }
+          },
+          "additionalProperties": false
         },
         {
           "type": "object",
-          "additionalProperties": false,
           "required": [
             "in-enum"
           ],
@@ -784,23 +783,24 @@
               "description": "consider only values defined in the enum as valid\n\ncan only be used on enum attributes (i.e. those that use the `enum` key)\n\nif the actual integer value does not correspond to any defined member of the enum, a `ValidationNotInEnumError` exception will be thrown",
               "const": true
             }
-          }
+          },
+          "additionalProperties": false
         }
       ]
     },
     "EnumSpec": {
       "type": "object",
-      "additionalProperties": false,
-      "patternProperties": { "^.*$": { "$ref": "#/definitions/EnumValueSpec" } }
+      "patternProperties": { "^.*$": { "$ref": "#/definitions/EnumValueSpec" } },
+      "additionalProperties": false
     },
     "EnumsSpec": {
       "type": "object",
-      "additionalProperties": false,
       "patternProperties": {
         "^[a-z][a-z0-9_]*$": {
           "$ref": "#/definitions/EnumSpec"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "Identifier": {
       "anyOf": [
