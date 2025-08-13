@@ -498,10 +498,14 @@
         },
         "pad-right": {
           "type": "integer",
+          "minimum": 0,
+          "maximum": 255,
           "description": "specify a byte which is the string or byte array padded with after the end up to the total size\n\ncan be used only with `size` or `size-eos: true` (when the size is fixed)\n\nwhen `terminator`:\n - isn't specified, then the `pad-right` controls where the string ends (basically acts like a terminator)\n - is specified, padding comes after the terminator, not before. The value is terminated immediately after the terminator occurs, so the `pad-right` has no effect on parsing and is only relevant for serialization"
         },
         "terminator": {
           "type": "integer",
+          "minimum": 0,
+          "maximum": 255,
           "description": "string or byte array reading will stop when it encounters this byte\n\ncannot be used with `type: strz` (which already implies `terminator: 0` - null-terminated string)"
         },
         "consume": {
