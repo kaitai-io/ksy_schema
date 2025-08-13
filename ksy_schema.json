@@ -324,6 +324,9 @@
                   "additionalProperties": false
                 }
               },
+              "patternProperties": {
+                "^-": true
+              },
               "additionalProperties": false
             }
           ],
@@ -442,6 +445,9 @@
                   },
                   "additionalProperties": false
                 }
+              },
+              "patternProperties": {
+                "^-": true
               },
               "additionalProperties": false
             }
