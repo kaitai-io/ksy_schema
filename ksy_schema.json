@@ -88,7 +88,7 @@
     },
     "PronomIdentifier": {
       "type": "string",
-      "pattern": "^(x-)?fmt\\/\\d+$",
+      "pattern": "^(x-)?fmt/\\d+$",
       "$comment": "https://www.wikidata.org/wiki/Property:P2748#P1793"
     },
     "RfcIdentifier": {
