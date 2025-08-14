@@ -348,7 +348,8 @@
         {
           "description": "name of or path to existing type name\n\nif name is single path element, then type resolved in such order:\n- from subtypes of current type\n- current type (so, recursive types is possible)\n- parent type\n\none can reference a nested user-defined type by specifying a relative path to it from the current type, with a double colon as a path delimiter (e.g. `foo::bar::my_type`)",
           "type": "string",
-          "pattern": "^([a-z][a-z0-9_]*::)*[a-z][a-z0-9_]*(\\(.+\\))?$"
+          "pattern": "^\\s*([a-z][a-z0-9_]*\\s*::\\s*)*[a-z][a-z0-9_]*\\s*(\\([\\s\\S]+\\)\\s*)?$",
+          "$comment": "whitespace characters between tokens are allowed since version 0.10, see https://github.com/kaitai-io/kaitai_struct/issues/792"
         },
         {
           "enum": [
